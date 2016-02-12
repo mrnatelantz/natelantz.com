@@ -13,6 +13,22 @@
             padding-top: 2%;
             padding-bottom: 2%; 
         }
+
+        .box{
+            background-color: #3498db;
+            width: 100%;
+            min-height: 200px;
+            padding: 3%;
+            margin: 3%;
+        }
+        .box-text{
+            background: rgba(0, 0, 0, 0.5);
+            color: #FDFDFD;
+            width: 100%;
+            /*position: absolute;
+            bottom: 0;
+            margin-bottom: 4%;*/
+        }
         </style>
     </head>
     <body>
@@ -30,14 +46,19 @@
         </div>
         <div class="container-fluid">    
             <div class="row">
-                <h4 class="text-center">Things I've been working on</h4>
+                <h3 class="text-center">What I've been up to</h3>
                 <hr>
-                @for ($i = 0; $i < 15; $i++)
+                @foreach ($activities as $activity)
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
-                        <img src="http://placehold.it/250x250" class="img-responsive img-rounded center-block" alt="Profile Pic">
-                        <span class="text-center">{{ $i }}</span>
+                        <a href="{{ $activity['url'] }}" target="_blank">
+                            <div class="box">
+                                <div class="box-text">
+                                    <span class="text-center">{{ $activity['name'] }}</span>
+                                </div>
+                            </a>
+                        </div>    
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </body>

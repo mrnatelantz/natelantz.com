@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [
+    'as' => 'home', 'uses' => 'Home@index'
+]);
 /*
 |--------------------------------------------------------------------------
 | Application Routes
