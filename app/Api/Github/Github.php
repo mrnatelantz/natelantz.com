@@ -58,7 +58,7 @@ class Github
 
     private function send($param = 'repos')
     {
-        $githubUrl = $this->url.$this->username.'/'.$param;
+        $githubUrl = $this->url.$this->username.'/'.$param.'?access_token='.env('GITHUB_TOKEN');
         $client = new GuzzleClient();
         $this->response = $client->get($githubUrl);
         $this->parseRepos();

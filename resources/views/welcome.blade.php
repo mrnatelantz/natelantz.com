@@ -29,6 +29,11 @@
             bottom: 0;
             margin-bottom: 4%;*/
         }
+
+        .background-github {
+            background-image: url('/img/code.png');
+            background-size: cover;
+        }
         </style>
     </head>
     <body>
@@ -51,7 +56,7 @@
                 @foreach ($activities as $activity)
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
                         <a href="{{ $activity['url'] }}" target="_blank">
-                            <div class="box">
+                            <div class="box background-{{ $activity['background_class'] }}">
                                 <div class="box-text">
                                     <span class="text-center">{{ $activity['name'] }}</span>
                                 </div>
