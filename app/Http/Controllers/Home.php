@@ -15,7 +15,7 @@ class Home extends Controller
     {
     	$activities = new MyActivities();
     	
-    	return view('welcome', ['activities' => $activities->all()]);
+    	return view('home', ['activities' => $activities->all()]);
 
     }
 }
