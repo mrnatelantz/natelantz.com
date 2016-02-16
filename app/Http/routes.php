@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', [
-    'as' => 'home', 'uses' => 'HomeController@index'
-]);
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,5 +24,13 @@ Route::get('/', [
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/', [
+        'as' => 'home', 'uses' => 'HomeController@index'
+    ]);
+});
+
+
+Route::group(['middleware' => ['web','auth']], function() {
+    Route::resource('/dashboard', 'Admin\DashboardController', ['as' => 'dashboard']);
+
 });
