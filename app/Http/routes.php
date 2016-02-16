@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-Route::group(['middleware' => ['web','auth']], function() {
-    Route::resource('/dashboard', 'Admin\DashboardController', ['as' => 'dashboard']);
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web','auth']], function() {
+    Route::resource('/dashboard', 'DashboardController', ['as' => 'dashboard']);
 
 });

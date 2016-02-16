@@ -11,6 +11,6 @@ class AdminDashboardControllerTest extends TestCase
     /** @test */
     function should_see_dashboard_page()
     {
-        $this->visit('/dashboard');
+        $this->visit('/admin/dashboard');
     }
 }
