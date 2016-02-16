@@ -19,6 +19,7 @@ class CreatePageVersionsTable extends Migration
             $table->string('name');
             $table->string('cover_image');
             $table->longText('content');
+            $table->string('template');
         });
     }
 
