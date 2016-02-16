@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Repositories\MyActivities;
 
-class Home extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
