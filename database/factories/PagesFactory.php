@@ -15,8 +15,8 @@ $factory->define(App\Modules\Pages\Page::class, function (Faker\Generator $faker
         'cover_image' => $faker->imageUrl(640, 480, 'cats'),
         'content' => json_encode($content),
         'template' => 'home',
-        'published_date' => date('H:i:s', rand(1,54000)),
+        'publish_date' => \Carbon\Carbon::now()->toDateTimeString(),
         'unpublish_date' => null,
-        'published' => 1
+        'published' => 0
     ];
 });

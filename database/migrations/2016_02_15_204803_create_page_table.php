@@ -15,13 +15,14 @@ class CreatePageTable extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug')->unique();
-            $table->string('name');
-            $table->string('cover_image');
-            $table->longText('content');
-            $table->string('template');
-            $table->date('publish_date');
-            $table->date('unpublish_date');
+            $table->string('name')->nullable();
+            $table->string('cover_image')->nullable();
+            $table->longText('content')->nullable();
+            $table->string('template')->nullable();
+            $table->text('publish_date')->nullable();
+            $table->text('unpublish_date')->nullable();
             $table->boolean('published')->default(false);
+            $table->timestamps();
         });
     }
 

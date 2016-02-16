@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
 
+    protected $fillable = ['slug', 'name', 'cover_image', 'content', 'template', 'publish_date', 'unpublish_date', 'published'];
 
     public function getContentAttribute($value)
     {
@@ -14,5 +15,10 @@ class Page extends Model
             return json_decode($value);
         }
         return $value;
+    }
+
+    public function versions()
+    {
+        return $this->hasMany('App\Modules\Pages\PageVersions');
     }
 }

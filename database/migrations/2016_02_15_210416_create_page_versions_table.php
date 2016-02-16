@@ -16,10 +16,11 @@ class CreatePageVersionsTable extends Migration
             $table->increments('id');
             $table->integer('page_id');
             $table->string('slug');
-            $table->string('name');
-            $table->string('cover_image');
-            $table->longText('content');
-            $table->string('template');
+            $table->string('name')->nullable();
+            $table->string('cover_image')->nullable();
+            $table->longText('content')->nullable();
+            $table->string('template')->nullable();
+            $table->timestamps();
         });
     }
 
