@@ -28,8 +28,13 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'home', 'uses' => 'HomeController@index'
     ]);
 
-    Route::get('/login', 'Auth\AuthController@getLogin');
-    Route::post('/login', 'Auth\AuthController@postLogin');
+    
+    Route::group(['namespace' => 'Auth'], function() {
+    	Route::get('/login', 'AuthController@getLogin');
+	    Route::post('/login', 'AuthController@postLogin');
+	    Route::get('/logout', 'AuthController@logout');
+    });
+    
 });
 
 
