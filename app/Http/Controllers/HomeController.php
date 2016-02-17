@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
     	$activities = new MyActivities();
-    	
+
     	return view('home', ['activities' => $activities->all()]);
 
     }

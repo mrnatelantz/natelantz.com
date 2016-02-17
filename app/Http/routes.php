@@ -27,6 +27,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', [
         'as' => 'home', 'uses' => 'HomeController@index'
     ]);
+
+    Route::get('/login', 'Auth\AuthController@getLogin');
+    Route::post('/login', 'Auth\AuthController@postLogin');
 });
 
 
@@ -34,3 +37,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
     Route::resource('/dashboard', 'DashboardController', ['as' => 'dashboard']);
 
 });
+
+/*
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+});
+
+*/
