@@ -1,5 +1,7 @@
 <?php
 
 return [
-  'name' => 'Pages',
+    'name' => 'Pages',
+    'route' => 'pages',
+    'icon' => 'glyphicon glyphicon-book'
 ];

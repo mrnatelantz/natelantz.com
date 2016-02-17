@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Pages;
+namespace App\Modules\Pages\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +22,6 @@ class PageVersions extends Model
 
     public function page()
     {
-        return $this->belongsTo('App\Modules\Pages\Page');
+        return $this->belongsTo('App\Modules\Pages\Models\Page');
     }
 }

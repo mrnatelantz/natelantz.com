@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Pages;
+namespace App\Modules\Pages\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +19,6 @@ class Page extends Model
 
     public function versions()
     {
-        return $this->hasMany('App\Modules\Pages\PageVersions');
+        return $this->hasMany('App\Modules\Pages\Models\PageVersions');
     }
 }

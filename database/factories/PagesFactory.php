@@ -2,7 +2,7 @@
 
 
 
-$factory->define(App\Modules\Pages\Page::class, function (Faker\Generator $faker) {
+$factory->define(App\Modules\Pages\Models\Page::class, function (Faker\Generator $faker) {
 
     $content = [
         'wysiwyg' => '<p>'.$faker->realText(200, 2).'</p>',
