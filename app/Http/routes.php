@@ -32,14 +32,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Auth'], function() {
     	Route::get('/login', 'AuthController@getLogin');
 	    Route::post('/login', 'AuthController@postLogin');
-	    Route::get('/logout', 'AuthController@logout');
+	    Route::get('/logout', ['uses' => 'AuthController@logout', 'as' => 'logout']);
     });
     
 });
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web','auth']], function() {
-    Route::resource('/dashboard', 'DashboardController', ['as' => 'dashboard']);
+    Route::get('/dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
 
 });
 
