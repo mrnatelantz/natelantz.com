@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Modules\Pages\Page;
+use App\Modules\Pages\Models\Page;
 
 class DashboardController extends Controller
 {
