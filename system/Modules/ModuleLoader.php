@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Modules\System\Modules;
+namespace RadCms\Modules;
 
-use App\Modules\System\Modules\ModuleLoaderInterface;
+use RadCms\Modules\ModuleLoaderInterface;
 
 class ModuleLoader implements ModuleLoaderInterface
 {
@@ -11,9 +11,9 @@ class ModuleLoader implements ModuleLoaderInterface
     protected $moduleFiles = [];
     protected $moduleFileName = 'module.php';
 
-    public function __construct()
+    public function __construct($dir = null)
     {
-        $this->modulesDir = app_path($this->modulesDir);
+        $this->modulesDir = (is_null($dir)) ? app_path($this->modulesDir) : base_path($dir);
         $this->scan()
             ->load();
     }
@@ -25,7 +25,6 @@ class ModuleLoader implements ModuleLoaderInterface
 
     protected function scan()
     {
-        //dd($this->modulesDir);
         if(is_null($this->modulesDir)) { return null; }
 
         foreach(glob($this->modulesDir.'*/'.$this->moduleFileName) as $file) {

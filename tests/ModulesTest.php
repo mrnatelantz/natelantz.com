@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use App\Modules\System\Modules\Modules;
+use RadCms\Modules\Modules;
 
 class ModulesTest extends TestCase
 {

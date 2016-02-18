@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Modules\System\Modules\Modules;
+use RadCms\Modules\Modules;
 
 class DashboardController extends Controller
 {

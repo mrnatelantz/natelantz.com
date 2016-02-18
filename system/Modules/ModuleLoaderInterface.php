@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\System\Modules;
+namespace RadCms\Modules;
 
 
 interface ModuleLoaderInterface
