@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Modules\Pages\Models\Page;
+use App\Modules\System\Modules\Modules;
 
 class DashboardController extends Controller
 {
@@ -18,7 +18,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard', ['pages' => Page::all()]);
+        $modules = new Modules();
+        return view('admin.dashboard', ['modules' => $modules->all()]);
     }
 
     

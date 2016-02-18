@@ -7,14 +7,14 @@ use App\Modules\System\Modules\ModuleLoaderInterface;
 class ModuleLoader implements ModuleLoaderInterface
 {
     protected $modules = [];
-    protected $modulesDir = 'app/Modules/';
+    protected $modulesDir = 'Modules/';
     protected $moduleFiles = [];
     protected $moduleFileName = 'module.php';
 
-    public function __construct($dir = null)
+    public function __construct()
     {
-
-        $this->scan($dir)
+        $this->modulesDir = app_path($this->modulesDir);
+        $this->scan()
             ->load();
     }
 
@@ -25,6 +25,7 @@ class ModuleLoader implements ModuleLoaderInterface
 
     protected function scan()
     {
+        //dd($this->modulesDir);
         if(is_null($this->modulesDir)) { return null; }
 
         foreach(glob($this->modulesDir.'*/'.$this->moduleFileName) as $file) {

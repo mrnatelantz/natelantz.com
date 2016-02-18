@@ -2,6 +2,6 @@
 
 return [
     'name' => 'Pages',
-    'route' => 'pages',
+    'route' => 'pages.index',
     'icon' => 'glyphicon glyphicon-book'
 ];
