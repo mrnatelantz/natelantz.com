@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use RadCms\Modules\Modules;
 
 class DashboardController extends Controller
 {
@@ -18,8 +17,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $modules = new Modules();
-        return view('admin.dashboard', ['modules' => $modules->all()]);
+        return view('admin.dashboard');
     }
 
     

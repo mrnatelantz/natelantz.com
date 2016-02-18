@@ -18,8 +18,10 @@ class AdminDashboardControllerTest extends TestCase
 
     /**
      * @test
+     * @todo move test to a view composer test if possible
      * Doesn't make sense, passes if hardcode the data expected,
-     * but fails when loading it dynamically
+     * but fails when loading it dynamically.
+     * This was moved to a view composer, should get moved.
      */
     function it_should_have_modules()
     {
