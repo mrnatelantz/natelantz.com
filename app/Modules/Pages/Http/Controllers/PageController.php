@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Modules\Pages\Models\Page;
 
 class PageController extends Controller
 {
@@ -16,7 +17,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('pages::admin.index');
+        return view('pages::admin.index', ['pages' => Page::all()]);
     }
 
     /**
@@ -26,7 +27,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages::admin.create');
     }
 
     /**
