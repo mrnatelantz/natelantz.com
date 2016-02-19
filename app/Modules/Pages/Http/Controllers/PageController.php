@@ -38,7 +38,8 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Page::create($request->all());
+        return Redirect(route('admin.pages.index'));
     }
 
     /**

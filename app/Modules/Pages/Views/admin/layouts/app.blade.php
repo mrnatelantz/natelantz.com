@@ -7,7 +7,7 @@
                 <h4>Pages</h4>
             </div>
             <div class="col-sm-6">
-                <a href="{{ route('pages.create.form') }}" class="btn btn-success pull-right">New</a>
+                <a href="{{ route('pages.create.get') }}" class="btn btn-success pull-right">New</a>
             </div>
             <div class="clearfix"></div>
         </div>
