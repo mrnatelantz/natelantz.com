@@ -33,7 +33,7 @@
 
 
             $('.submitButton').on('click', function(event) {
-                var content = '<input type="hidden" name="content" value="' + $('.summernote').summernote('code') + '">';
+                var content = '<input type="hidden" name="content[0][wysiwyg]" value="' + $('.summernote').summernote('code') + '">';
                 $('form#submitForm').append(content);
 
                 $.each($('.input-fields input'), function() {

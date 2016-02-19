@@ -17,6 +17,7 @@ class PageFrontController extends Controller
     {
         //dd($slug);
         $page = Page::where('slug', '=', $slug)->first();
-        return view('page', ['page' => $page]);
+        $template = (isset($page->template) && !is_null($page->template)) ? $page->template : 'page';
+        return view($template, ['page' => $page]);
     }
 }

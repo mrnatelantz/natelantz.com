@@ -38,8 +38,15 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        Page::create($request->all());
-        return Redirect(route('admin.pages.index'));
+        $page = new Page();
+        $page->slug         = $request->input('slug');
+        $page->name         = $request->input('name');
+        $page->cover_image  = $request->input('cover_image');
+        $page->content      = $request->input('content');
+        $page->template     = $request->input('template');
+        $page->save();
+
+        return Redirect(route('pages.index'));
     }
 
     /**
