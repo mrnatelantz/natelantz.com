@@ -29,6 +29,8 @@ class AdminContentTypeTest extends TestCase
         $template = $contentTypeTemplate->find($pageContentTypes[0]['name']);
         $viewInfo = $contentTypeTemplate->viewInfo($pageContentTypes[0]['name']);
 
+        // check to see if view file really exists
+        // check to see if the rendered view is of string type
         $this->assertFileExists($viewInfo['real_path']);
         $this->assertInternalType('string', $template);
 
