@@ -190,6 +190,13 @@
                 });
                 event.preventDefault();
             });
+
+            $('.content-types').on('click', '.remove-content-type-btn', function(event) {
+                event.preventDefault();
+                var id = $(this).attr('data-id');
+                var removeElements = $('.content-types').find('[data-id="'+ id +'"]');
+                $(removeElements).remove();
+            });
         });
     </script>
 @endpush
