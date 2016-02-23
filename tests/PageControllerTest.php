@@ -4,18 +4,17 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use App\Modules\Pages\Http\Controllers\PageController;
-use App\Modules\Pages\Models\Page;
+use RadCms\Pages\Models\Page;
 
 class PageControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseTransactions, WithoutMiddleware;
 
 
     /** @test */
     function it_returns_all_pages()
     {
-        $pageFactory = factory(App\Modules\Pages\Models\Page::class)->make();
+        $pageFactory = factory(RadCms\Pages\Models\Page::class)->make();
         Page::create($pageFactory['attributes']);
 
         $this->visit('admin/pages')
