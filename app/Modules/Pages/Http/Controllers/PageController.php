@@ -164,13 +164,26 @@ class PageController extends Controller
             'html' => '',
             'status' => false,
         ];
-        if(View::exists('pages::admin.content-types.' . $name)) {
 
-            $contentType = [
-                'content' => '',
-                'orderByCount' => '',
-                'callback' => true,
+        $contentType = [
+            'content' => '',
+            'orderByCount' => '',
+            'ajax' => true,
+        ];
+        /**
+         * @todo Refactor this logic into a Facade.
+         * It would be nice to have a clean way to load views while
+         * supporting user defined content types
+         */
+        if(View::exists('admin.content-types.' . $name)) {
+
+            $view = View::make('pages::admin.content-types.'.$name, ['contentType' => $contentType]);
+            $data = [
+                'html' => $view->render(),
+                'status' => true,
             ];
+        }
+        elseif(View::exists('pages::admin.content-types.' . $name)) {
 
             $view = View::make('pages::admin.content-types.'.$name, ['contentType' => $contentType]);
             $data = [

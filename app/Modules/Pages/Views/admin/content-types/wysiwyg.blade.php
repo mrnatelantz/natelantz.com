@@ -31,7 +31,7 @@
 </div>
 <hr />
 
-@if(isset($contentType) && $contentType['callback'])
+@if(isset($contentType) && $contentType['ajax'])
     <script>
         jQuery(".wysiwyg-{{ $time }}").summernote();
     </script>

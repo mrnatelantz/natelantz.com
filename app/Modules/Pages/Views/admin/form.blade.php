@@ -37,29 +37,45 @@
                 <li><a href="#">Separated link</a></li>
             </ul>
         </div>
-        <hr />
+        <div class="clearfix"></div>
         <div class="content-types">
             @if(isset($page) && isset($page->content))
                 @foreach($page->content as $contentTypes)
                     @foreach($contentTypes as $type => $content)
                         <?php $orderCount = 0; ?>
-                        @if(View::exists('pages::admin.content-types.'.$type))
-                                <?php $contentType = [
-                                        'content' => $content,
-                                        'orderByCount' => $orderCount++,
-                                        'callback' => false
-                                ]; ?>
+                        @if(View::exists('admin.content-types.'.$type))
+                            <?php $contentType = [
+                                    'content' => $content,
+                                    'orderByCount' => $orderCount++,
+                                    'ajax' => false
+                            ]; ?>
+                                @include('admin.content-types.'.$type, ['contentType' => $contentType])
+                        @elseif(View::exists('pages::admin.content-types.'.$type))
+                            <?php $contentType = [
+                                    'content' => $content,
+                                    'orderByCount' => $orderCount++,
+                                    'ajax' => false
+                            ]; ?>
                             @include('pages::admin.content-types.'.$type, ['contentType' => $contentType])
                         @endif
                     @endforeach
                 @endforeach
             @else
-                <?php $contentType = [
-                        'content' => '',
-                        'orderByCount' => 0,
-                        'callback' => false
-                ]; ?>
-                @include('pages::admin.content-types.wysiwyg', $contentType)
+                @if(View::exists('admin.content-types.wysiwyg'))
+                    <?php $contentType = [
+                            'content' => '',
+                            'orderByCount' => 0,
+                            'ajax' => false
+                    ]; ?>
+                    @include('admin.content-types.wysiwyg', ['contentType' => $contentType])
+                @elseif(View::exists('pages::admin.content-types.wysiwyg'))
+                    <?php $contentType = [
+                            'content' => '',
+                            'orderByCount' => 0,
+                            'ajax' => false
+                    ]; ?>
+                    @include('pages::admin.content-types.wysiwyg', ['contentType' => $contentType])
+                @endif
             @endif
         </div>
 
