@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\Pages\Http\Controllers;
+namespace RadCms\Pages\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Modules\Pages\Models\Page;
-use App\Modules\Pages\Models\PageVersions;
+use RadCms\Pages\Models\Page;
+use RadCms\Pages\Models\PageVersions;
 use View;
 
 class PageController extends Controller

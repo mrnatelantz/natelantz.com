@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['namespace' => 'App\Modules\Pages\Http\Controllers', 'middleware' => ['web','auth']], function() {
+Route::group(['namespace' => 'RadCms\Pages\Http\Controllers', 'middleware' => ['web','auth']], function() {
 
 
     Route::get('admin/pages', ['uses' => 'PageController@index', 'as' => 'pages.index']);
@@ -16,4 +16,4 @@ Route::group(['namespace' => 'App\Modules\Pages\Http\Controllers', 'middleware' 
 });
 
 
-Route::get('/{slug}', ['uses' => 'App\Modules\Pages\Http\Controllers\PageFrontController@find', 'middleware' => ['web']]);
+Route::get('/{slug}', ['uses' => 'RadCms\Pages\Http\Controllers\PageFrontController@find', 'middleware' => ['web']]);

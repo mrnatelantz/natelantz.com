@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Modules\Pages\Models;
+namespace RadCms\Pages\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Page extends Model
+class PageVersions extends Model
 {
 
-    protected $fillable = ['slug', 'name', 'cover_image', 'content', 'template', 'publish_date', 'unpublish_date', 'published'];
-
+    protected $fillable = ['page_id', 'slug', 'name', 'cover_image', 'content', 'template'];
 
     public function getContentAttribute($value)
     {
@@ -18,19 +17,19 @@ class Page extends Model
         return $value;
     }
 
-
     public function setContentAttribute($value)
     {
         if(!is_string($value)) {
             $this->attributes['content'] = json_encode($value);
         }
-        else{
+        else {
             $this->attributes['content'] = $value;
         }
+
     }
 
-    public function versions()
+    public function page()
     {
-        return $this->hasMany('App\Modules\Pages\Models\PageVersions', 'page_id', 'id');
+        return $this->belongsTo('RadCms\Pages\Models\Page', 'page_id', 'id');
     }
 }

@@ -157,11 +157,12 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
 
-        /*
-         * Modules
-         */
-        App\Modules\Pages\PagesServiceProvider::class,
 
+        /**
+         * System
+         */
+        RadCms\Admin\AdminServiceProvider::class,
+        RadCms\Pages\PagesServiceProvider::class,
     ],
 
     /*

@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('radcms::layouts.app')
 
 @section('content')
 

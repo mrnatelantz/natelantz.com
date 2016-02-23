@@ -14,7 +14,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
-            'admin.layouts.module-nav', 'App\Http\ViewComposers\AdminModuleNavViewComposer'
+            'radcms::layouts.module-nav', 'App\Http\ViewComposers\AdminModuleNavViewComposer'
         );
     }
 

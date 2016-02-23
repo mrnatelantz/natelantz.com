@@ -142,7 +142,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 {{-- add modules --}}
-                @include('admin.layouts.module-nav')
+                @include('radcms::layouts.module-nav')
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ route('logout') }}">Logout</a></li>
                 </ul>
@@ -156,8 +156,6 @@
     <div class="container-fluid">
 
         <div class="row">
-
-            @include('admin.layouts.module-nav')
 
             <div class="col-sm-12 main">
                 @yield('content')
