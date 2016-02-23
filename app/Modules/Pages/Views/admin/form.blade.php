@@ -49,7 +49,7 @@
                                         'orderByCount' => $orderCount++,
                                         'callback' => false
                                 ]; ?>
-                            @include('pages::admin.content-types.'.$type, $contentType)
+                            @include('pages::admin.content-types.'.$type, ['contentType' => $contentType])
                         @endif
                     @endforeach
                 @endforeach
@@ -142,7 +142,12 @@
     <script>
         {{-- @todo move this into a js file --}}
         $(document).ready(function() {
-            $('.wysiwyg').summernote();
+            //$('.wysiwyg').summernote();
+            $.each($('.wysiwyg'), function() {
+                var ele = $(this).attr('data-id');
+                console.log(ele);
+                $('.wysiwyg-' + ele).summernote();
+            });
 
             $('.submit-button').on('click', function(event) {
 

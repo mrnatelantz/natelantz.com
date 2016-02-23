@@ -1,4 +1,4 @@
-<?php $time = time(); ?>
+<?php $time = rand(); ?>
 
 @if(isset($contentType))
 <div class="content-type group" data-orderby="{{ $contentType['orderByCount'] or null }}">
@@ -16,7 +16,7 @@
                     <h4 class="modal-title" id="{{ $time }}-Label">Content Type: WYSIWYG</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="wysiwyg content-type-field wysiwyg-{{ $time }}" data-contentType="wysiwyg">
+                    <div class="wysiwyg content-type-field wysiwyg-{{ $time }}" data-contentType="wysiwyg" data-id="{{ $time }}">
                         @if(isset($contentType))
                             {!! $contentType['content'] or null !!}
                         @endif
