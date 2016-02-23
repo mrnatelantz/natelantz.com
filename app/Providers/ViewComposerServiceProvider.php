@@ -14,7 +14,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
-            'admin.layouts.sidenav', 'App\Http\ViewComposers\AdminSideNavViewComposer'
+            'admin.layouts.module-nav', 'App\Http\ViewComposers\AdminModuleNavViewComposer'
         );
     }
 

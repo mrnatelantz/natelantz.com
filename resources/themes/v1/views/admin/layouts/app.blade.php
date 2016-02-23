@@ -141,6 +141,8 @@
                 <a class="navbar-brand" href="{{ route('dashboard')  }}">Dashboard</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
+                {{-- add modules --}}
+                @include('admin.layouts.module-nav')
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ route('logout') }}">Logout</a></li>
                 </ul>
@@ -155,9 +157,9 @@
 
         <div class="row">
 
-            @include('admin.layouts.sidenav')
+            @include('admin.layouts.module-nav')
 
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="col-sm-12 main">
                 @yield('content')
 
             </div>

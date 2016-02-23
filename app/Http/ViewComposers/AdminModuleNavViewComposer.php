@@ -5,7 +5,7 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 use RadCms\Modules\Modules;
 
-class AdminSideNavViewComposer
+class AdminModuleNavViewComposer
 {
     /**
      * The user repository implementation.
