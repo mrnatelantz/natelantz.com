@@ -17,6 +17,10 @@ class AdminServiceProvider extends ServiceProvider
             require __DIR__ . '/Http/routes.php';
         }
         $this->loadViewsFrom(__DIR__.'/Views', 'radcms');
+
+        view()->composer(
+            'radcms::layouts.module-nav', 'RadCms\Admin\Http\ViewComposers\AdminModuleNavViewComposer'
+        );
     }
 
     /**

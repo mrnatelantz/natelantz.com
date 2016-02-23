@@ -17,10 +17,6 @@ class PagesServiceProvider extends ServiceProvider
             require __DIR__ . '/Http/routes.php';
         }
         $this->loadViewsFrom(__DIR__ . '/Views', 'pages');
-
-        view()->composer(
-            'radcms::layouts.module-nav', 'RadCms\Pages\Http\ViewComposers\AdminModuleNavViewComposer'
-        );
     }
 
     /**

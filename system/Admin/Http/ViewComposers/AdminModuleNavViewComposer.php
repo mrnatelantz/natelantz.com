@@ -1,6 +1,6 @@
 <?php
 
-namespace RadCms\Pages\Http\ViewComposers;
+namespace RadCms\Admin\Http\ViewComposers;
 
 use Illuminate\View\View;
 use RadCms\Modules\Modules;

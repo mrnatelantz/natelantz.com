@@ -36,16 +36,3 @@ Route::group(['middleware' => ['web']], function () {
     });
     
 });
-
-
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web','auth']], function() {
-    Route::get('/dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
-
-});
-
-/*
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-});
-
-*/
