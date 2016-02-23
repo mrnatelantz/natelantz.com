@@ -17,6 +17,10 @@ class PagesServiceProvider extends ServiceProvider
             require __DIR__ . '/Http/routes.php';
         }
         $this->loadViewsFrom(__DIR__ . '/Views', 'pages');
+
+        view()->composer(
+            'pages::admin.partials.content-type-selector', 'RadCms\Pages\Http\ViewComposers\ContentSelectorViewComposer'
+        );
     }
 
     /**

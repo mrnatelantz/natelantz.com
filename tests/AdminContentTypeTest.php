@@ -17,7 +17,10 @@ class AdminContentTypeTest extends TestCase
         $this->assertGreaterThan(0, count($pageContentTypes));
     }
 
-    /** @test */
+    /**
+     * @test
+     * @todo mock filesystem in a way that does not rely on files to already exists.
+     */
     function it_should_return_a_content_type_template()
     {
         // load the content types for the view

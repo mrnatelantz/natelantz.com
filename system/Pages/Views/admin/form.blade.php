@@ -25,18 +25,8 @@
         </div>
         <hr />
 
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Add Content Type <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#" class="content-type-select" data-href="{{ route('pages.contentType', ['name' => 'wysiwyg']) }}">WYSIWYG</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-            </ul>
-        </div>
+        @include('pages::admin.partials.content-type-selector')
+
         <div class="clearfix"></div>
         <div class="content-types">
             @if(isset($page) && isset($page->content))
