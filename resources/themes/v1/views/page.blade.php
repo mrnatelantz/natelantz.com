@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
     @if(isset($page))
         <h1>{{ $page->name }}</h1>
         <img src="{{ $page->cover_image }}">

@@ -54,4 +54,10 @@ class PageModelTest extends TestCase
         $pageVersion = PageVersions::create($data);
         $this->assertInstanceOf('App\Modules\Pages\Models\PageVersions', $pageVersion);
     }
+
+    /** @test */
+    function it_should_find_the_latest_version()
+    {
+
+    }
 }

@@ -21,7 +21,7 @@ class Page extends Model
 
     public function setContentAttribute($value)
     {
-        if(is_object($value) || is_array($value)) {
+        if(!is_string($value)) {
             $this->attributes['content'] = json_encode($value);
         }
         else{
@@ -31,6 +31,6 @@ class Page extends Model
 
     public function versions()
     {
-        return $this->hasMany('App\Modules\Pages\Models\PageVersions');
+        return $this->hasMany('App\Modules\Pages\Models\PageVersions', 'page_id', 'id');
     }
 }
