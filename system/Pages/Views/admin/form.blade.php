@@ -146,6 +146,7 @@
 @push('scripts')
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
     <script>
+        {{-- This is getting dirty --}}
         {{-- @todo move this into a js file --}}
         $(document).ready(function() {
             //$('.wysiwyg').summernote();
@@ -196,6 +197,37 @@
                 var id = $(this).attr('data-id');
                 var removeElements = $('.content-types').find('[data-id="'+ id +'"]');
                 $(removeElements).remove();
+            });
+
+            // move content type up or down
+            $('.content-types').on('click', '.move-content-type-btn', function(event) {
+                event.preventDefault();
+                var id = $(this).attr('data-id');
+                var direction = $(this).attr('data-direction');
+                if(direction == 'up') {
+                    var element = $(this).closest('div.content-type.group');
+                    var prependElement = $(element).prev($('div.content-type.group'));
+                    $(element).insertBefore($(prependElement));
+
+                    // ghetto, needs to be a css class
+                    $(this).addClass('btn-success');
+                    setTimeout(function(){
+                        $(element).find('.move-content-type-btn').removeClass('btn-success');
+                    }, 200);
+
+                }
+                else if(direction == 'down') {
+                    var element = $(this).closest('div.content-type.group');
+                    var afterElement = $(element).next($('div.content-type.group'));
+                    $(element).insertAfter($(afterElement));
+
+                    // ghetto, needs to be a css class
+                    $(this).addClass('btn-success');
+                    setTimeout(function(){
+                        $(element).find('.move-content-type-btn').removeClass('btn-success');
+                    }, 200);
+                }
+
             });
         });
     </script>

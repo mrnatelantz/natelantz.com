@@ -5,6 +5,12 @@
 @else
     <div class="content-type group" data-orderby="" data-id="{{ $time }}">
         @endif
+        <button class="btn btn-default move-content-type-btn" data-id="{{ $time }}" data-direction="down">
+            <i class="glyphicon glyphicon-arrow-down"></i>
+        </button>
+        <button class="btn btn-default move-content-type-btn" data-id="{{ $time }}" data-direction="up">
+            <i class="glyphicon glyphicon-arrow-up"></i>
+        </button>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#{{ $time }}">
             HTML
         </button>
@@ -31,5 +37,5 @@
                 </div>
             </div>
         </div>
+        <hr />
     </div>
-    <hr />
