@@ -145,7 +145,6 @@
             //$('.wysiwyg').summernote();
             $.each($('.wysiwyg'), function() {
                 var ele = $(this).attr('data-id');
-                console.log(ele);
                 $('.wysiwyg-' + ele).summernote();
             });
 
