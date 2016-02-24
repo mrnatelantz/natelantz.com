@@ -158,10 +158,10 @@ return [
 
 
         /**
-         * System
+         * RadCms
+         * All Modules are loaded via the RadCms ServiceProvider Class
          */
-        RadCms\Admin\AdminServiceProvider::class,
-        RadCms\Pages\PagesServiceProvider::class,
+        RadCms\RadCmsServiceProvider::class,
     ],
 
     /*
