@@ -1,4 +1,8 @@
 <?php
+/**
+ * All RadCms Modules get loaded here with the exception of this one file.
+ * This is loaded in config/app.php
+ */
 
 namespace RadCms;
 
@@ -25,5 +29,6 @@ class RadCmsServiceProvider extends ServiceProvider
     {
         $this->app->register('RadCms\Admin\AdminServiceProvider');
         $this->app->register('RadCms\Pages\PagesServiceProvider');
+        $this->app->register('RadCms\Menu\MenuServiceProvider');
     }
 }
