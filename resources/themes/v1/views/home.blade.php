@@ -45,7 +45,6 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <h3 class="text-center">What I've been up to</h3>
             <hr>
             @foreach ($activities as $activity)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">

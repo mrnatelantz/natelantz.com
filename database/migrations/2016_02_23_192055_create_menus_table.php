@@ -12,7 +12,10 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('menus', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
     }
 
     /**
@@ -22,6 +25,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('menus');
     }
 }

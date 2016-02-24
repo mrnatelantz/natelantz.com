@@ -33,4 +33,9 @@ class Page extends Model
     {
         return $this->hasMany('RadCms\Pages\Models\PageVersions', 'page_id', 'id');
     }
+
+    public function menu_item()
+    {
+        $this->hasMany('RadCms\Menu\Models\MenuItem');
+    }
 }
