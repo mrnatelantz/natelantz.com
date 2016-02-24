@@ -16,4 +16,4 @@ Route::group(['namespace' => 'RadCms\Pages\Http\Controllers', 'middleware' => ['
 });
 
 
-Route::get('/{slug}', ['uses' => 'RadCms\Pages\Http\Controllers\PageFrontController@find', 'middleware' => ['web']]);
+Route::get('/{slug}', ['uses' => 'RadCms\Pages\Http\Controllers\PageFrontController@find', 'as' => 'pages.public.find', 'middleware' => ['web']]);
