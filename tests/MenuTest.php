@@ -10,7 +10,7 @@ use RadCms\Menu\Models\ChildMenuItem;
 
 use RadCms\Pages\Models\Page;
 
-use RadCms\Menu\Repository\Menu as MenuRepo;
+use RadCms\Menu\Factory\Menu as MenuRepo;
 
 class MenuTest extends TestCase
 {
@@ -46,7 +46,7 @@ class MenuTest extends TestCase
                 'menu_id'   => 1,
                 'type'      => 'internal',
                 'page_id'   => 2,
-                'name'      => 'Internal Page',
+                'name'      => 'Internal Page 2',
                 'url'       => null,
                 'target'    => '_self'
             ],
@@ -154,11 +154,8 @@ class MenuTest extends TestCase
         $menu = $menuRepo->find($name);
 
         foreach($menu->menu_items as $item) {
+            // children might be null, but should exist
             $this->assertObjectHasAttribute('children', $item);
-            if(isset($item->children)) {
-                $this->assertGreaterThan(0, count($item->children));
-            }
-
         }
     }
 
