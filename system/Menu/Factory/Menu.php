@@ -5,6 +5,7 @@ namespace RadCms\Menu\Factory;
 use Illuminate\Support\Facades\Cache;
 use RadCms\Menu\Models\Menu as MenuModel;
 use RadCms\Menu\Models\ChildMenuItem;
+use RadCms\Menu\Models\MenuItem;
 
 class Menu
 {
@@ -29,6 +30,70 @@ class Menu
         return json_decode(json_encode($this->menu));
     }
 
+    /**
+     * @param array $menu
+     * @return static
+     */
+    public function create(array $menu = [])
+    {
+        return MenuModel::create($menu);
+    }
+
+    /**
+     * @param array $menuItems
+     * @return bool
+     */
+    public function createItem(array $menuItems = [])
+    {
+        $menu_id = 0;
+        $items = [];
+        // multi dimensional array, more than one item
+        if (count($menuItems) != count($menuItems, 1))
+        {
+            $menu_id = $menuItems[0]['menu_id'];
+            foreach($menuItems as $item) {
+                if(!$items[] = $this->addItem($item)) {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            $menu_id = $menuItems['menu_id'];
+            if(!$items[] = $this->addItem($menuItems)) {
+                return false;
+            }
+        }
+
+        $menuName = MenuModel::find($menu_id)
+                        ->pluck('name')
+                        ->first();
+        // rebuild menu cache
+        $this->buildMenu($menuName);
+        return $items;
+    }
+
+    /**
+     * @param $item
+     * @return static
+     */
+    protected function addItem($item)
+    {
+        $menuItem = MenuItem::create($item);
+        if(isset($item['parent_id']) && !is_null($item['parent_id']))
+        {
+            ChildMenuItem::create([
+                'parent_id' => $item['parent_id'],
+                'child_id'  => $menuItem->id
+            ]);
+        }
+        return $menuItem;
+
+    }
+
+    /**
+     * @param $name
+     */
     protected function buildMenu($name)
     {
         $menuItems = MenuModel::where('menus.name', '=', $name)
