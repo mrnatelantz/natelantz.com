@@ -11,7 +11,7 @@ $factory->define(RadCms\Pages\Models\Page::class, function (Faker\Generator $fak
 
     return [
         'slug' => $faker->slug(),
-        'name' => $faker->realText(100, 1),
+        'name' => $faker->word,
         'cover_image' => $faker->imageUrl(640, 480, 'cats'),
         'content' => json_encode($content),
         'template' => 'home',

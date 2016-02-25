@@ -8,27 +8,44 @@
 
 namespace RadCms\Menu\Repository;
 
-use RadCms\Menu\Models\Menu;
+use RadCms\Menu\Models\Menu as MenuModel;
+use RadCms\Pages\Models\Page;
 
 class Menu
 {
 
+    protected $menu = [];
+
+    /**
+     * @param null $name
+     * @return array|null
+     */
     public function find($name = null)
     {
-        $menuItems = Menu::where('name', '=', 'main_menu')
+        // @todo throw an exception when null
+        if(is_null($name)) { return null; }
+
+        $menuItems = MenuModel::where('name', '=', 'main_menu')
             ->first()
             ->menu_items;
 
-        $result = [
-            'name' => 'main_menu',
+        $this->menu = [
+            'name' => $name,
             'menu_items' => []
         ];
 
-        foreach($menuItems as $item) {
+        $this->buildMenu($menuItems);
+
+        return $this->menu;
+    }
+
+    protected function buildMenu($menuItems)
+    {
+        foreach($menuItems as $key => $item) {
 
             if($item->type == 'internal') {
                 if(!is_null($item->page_id)) {
-                    $result['menu_items'][] = [
+                    $this->menu['menu_items'][] = (object)[
                         'type'  => 'internal',
                         'route' => 'pages.public.find',
                         'slug'  => $item->page->slug,
@@ -38,7 +55,7 @@ class Menu
                 }
             }
             elseif($item->type == 'external') {
-                $result['menu_items'][] = [
+                $this->menu['menu_items'][] = (object)[
                     'type'  => 'external',
                     'url'   => $item->url,
                     'name'  => $item->name,
@@ -48,6 +65,5 @@ class Menu
 
         }
 
-        return $result;
     }
 }
