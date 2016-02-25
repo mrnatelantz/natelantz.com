@@ -25,7 +25,7 @@ class Menu
         }
 
         $this->buildMenu($name);
-        Cache::forever('RadCms.menu.'.$name, json_decode(json_encode($this->menu)));
+
         return json_decode(json_encode($this->menu));
     }
 
@@ -53,11 +53,10 @@ class Menu
             foreach($item->children as $child) {
                 $children[] = $this->formatMenuItem($child->child_item);
             }
-            //if(!empty($children)) {
-                $this->menu['menu_items'][$key]['children'] = $children;
-            //}
-
+            $this->menu['menu_items'][$key]['children'] = $children;
         }
+
+        Cache::forever('RadCms.menu.'.$name, json_decode(json_encode($this->menu)));
 
     }
 
