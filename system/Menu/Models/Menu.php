@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
-    protected $fillable =['name'];
+    protected $fillable = ['name'];
 
     public $timestamps = false;
 
     public function menu_items()
     {
-        return $this->hasMany('RadCms\Menu\Models\MenuItem');
+        return $this->hasMany('RadCms\Menu\Models\MenuItem', 'menu_id', 'id');
     }
 }

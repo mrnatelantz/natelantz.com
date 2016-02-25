@@ -10,7 +10,6 @@ class ChildMenuItem extends Model
 
     public $timestamps = false;
 
-
     public function child_item()
     {
         return $this->hasOne('RadCms\Menu\Models\MenuItem', 'id', 'child_id');

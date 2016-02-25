@@ -20,20 +20,6 @@ class MenuItem extends Model
     public function children()
     {
         return $this->hasMany('RadCms\Menu\Models\ChildMenuItem', 'parent_id', 'id');
-        /*
-        return $this->hasManyThrough(
-            'RadCms\Menu\Models\MenuItem',
-            'RadCms\Menu\Models\ChildMenuItem',
-            'child_id',
-            'id'
-        );
-        */
     }
-
-    public function child()
-    {
-        $this->belongsTo('RadCms\Menu\Models\ChildMenuItem');
-    }
-
 
 }
