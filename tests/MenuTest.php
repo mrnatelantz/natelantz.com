@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 use RadCms\Menu\Models\Menu;
 use RadCms\Menu\Models\MenuItem;
+use RadCms\Menu\Models\ChildMenuItem;
+
 use RadCms\Pages\Models\Page;
 
 use RadCms\Menu\Repository\Menu as MenuRepo;
@@ -26,7 +28,6 @@ class MenuTest extends TestCase
         $menuItemFactory = [
             [
                 'menu_id'   => 1,
-                'parent_id' => 1,
                 'type'      => 'internal',
                 'page_id'   => 1,
                 'name'      => 'Internal Page',
@@ -35,13 +36,28 @@ class MenuTest extends TestCase
             ],
             [
                 'menu_id'   => 1,
-                'parent_id' => null,
                 'type'      => 'external',
                 'page_id'   => null,
                 'name'      => 'Google',
                 'url'       => '//google.com',
                 'target'    => '_blank'
             ],
+            [
+                'menu_id'   => 1,
+                'type'      => 'internal',
+                'page_id'   => 2,
+                'name'      => 'Internal Page',
+                'url'       => null,
+                'target'    => '_self'
+            ],
+            [
+                'menu_id'   => 1,
+                'type'      => 'internal',
+                'page_id'   => 3,
+                'name'      => 'Internal Page',
+                'url'       => null,
+                'target'    => '_self'
+            ]
 
 
         ];
@@ -49,7 +65,27 @@ class MenuTest extends TestCase
             MenuItem::create($item);
         }
 
+        $child_menu_items = [
+            [
+                'parent_id' => 1,
+                'child_id'  => 3
+            ],
+            [
+                'parent_id' => 1,
+                'child_id'  => 4
+            ]
+        ];
+
+        foreach($child_menu_items as $child) {
+            ChildMenuItem::create($child);
+        }
+
+
         // add page for menu item to reference
+        $pageFactory = factory(RadCms\Pages\Models\Page::class)->make();
+        Page::create($pageFactory['attributes']);
+        $pageFactory = factory(RadCms\Pages\Models\Page::class)->make();
+        Page::create($pageFactory['attributes']);
         $pageFactory = factory(RadCms\Pages\Models\Page::class)->make();
         Page::create($pageFactory['attributes']);
     }

@@ -25,9 +25,13 @@ class Menu
         // @todo throw an exception when null
         if(is_null($name)) { return null; }
 
-        $menuItems = MenuModel::where('name', '=', 'main_menu')
+        // @todo exclude child menu items
+        $menuItems = MenuModel::where('name', '=', $name)
             ->first()
-            ->menu_items;
+            ->menu_items()
+            ->get();
+
+        //dd($menuItems);
 
         $this->menu = [
             'name' => $name,
@@ -35,17 +39,22 @@ class Menu
         ];
 
         $this->buildMenu($menuItems);
-
-        return $this->menu;
+        dd((object)$this->menu);
+        return (object)$this->menu;
     }
 
     protected function buildMenu($menuItems)
     {
+
         foreach($menuItems as $key => $item) {
+
+
+
+
 
             if($item->type == 'internal') {
                 if(!is_null($item->page_id)) {
-                    $this->menu['menu_items'][] = (object)[
+                    $this->menu['menu_items'][] = [
                         'type'  => 'internal',
                         'route' => 'pages.public.find',
                         'slug'  => $item->page->slug,
@@ -55,13 +64,23 @@ class Menu
                 }
             }
             elseif($item->type == 'external') {
-                $this->menu['menu_items'][] = (object)[
+                $this->menu['menu_items'][] = [
                     'type'  => 'external',
                     'url'   => $item->url,
                     'name'  => $item->name,
                     'target' => '_blank'
                 ];
             }
+
+            $children = [];
+            foreach($item->children as $child) {
+                $children[] = $child->child_item['attributes'];
+            }
+            if(!empty($children)) {
+                //dd($this->menu['menu_items'][$key]);
+                $this->menu['menu_items'][$key]['children'] = $children;
+            }
+
 
         }
 
