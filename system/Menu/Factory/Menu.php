@@ -73,6 +73,26 @@ class Menu
         return $items;
     }
 
+    public function findRaw($id)
+    {
+        $menuItems = MenuModel::find($id)
+            ->first()
+            ->with('menu_items')
+            ->with(['menu_items' => function ($query) {
+                $query->whereNotIn(
+                    'menu_items.id',
+                    ChildMenuItem::select('child_id')->get()->toArray()
+                )
+                ->with(['children' => function($query2) {
+                    $query2->with('child_item');
+                }]);
+            }])
+            ->get()
+            ->toArray();
+
+        return $menuItems;
+    }
+
     /**
      * @param $item
      * @return static
