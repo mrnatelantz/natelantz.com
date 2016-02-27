@@ -8,12 +8,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use RadCms\Menu\Models\Menu;
+use RadCms\Menu\Factory\Menu as MenuFactory;
 
 class MenuController extends Controller
 {
     public function index()
     {
-        return view('menu::admin.index');
+        return view('menu::admin.index', ['menus' => Menu::all()]);
     }
 
     public function create()
@@ -32,6 +33,7 @@ class MenuController extends Controller
 
     public function edit($id)
     {
-        return view('menu.edit');
+        $menu = new MenuFactory();
+        return view('menu::admin.edit', ['menu' => $menu->findRaw($id)]);
     }
 }

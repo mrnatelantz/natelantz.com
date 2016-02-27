@@ -1,26 +1,22 @@
 @extends('menu::admin.layouts.app')
 
 @section('body')
+    @if(isset($menu))
+        <div class="form">
+            <input class="form-control" value="{{ $menu->name or null }}">
+            <ul>
+                @if(isset($menu->child))
 
-    <div id="menu-form">
-        <div class="form-horizontal col-md-4">
-            <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">Name</label>
-                <div class="col-sm-10">
-                    <input v-model="menu.name" v-on:keyup.enter="submit" id="name" class="form-control" placeholder="Menu Name" required aria-required="true">
-                </div>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary" v-on:click="">Save</button>
-            </div>
+                @endif
+            </ul>
         </div>
-    </div>
-
+    @endif
 @endsection
 
 @push('scripts')
 <script src="//cdn.jsdelivr.net/vue/1.0.16/vue.min.js"></script>
 <script>
+    <?php /*
     new Vue({
         el: '#menu-form',
         data: {
@@ -38,6 +34,6 @@
             }
         }
     });
-
+    */ ?>
 </script>
 @endpush

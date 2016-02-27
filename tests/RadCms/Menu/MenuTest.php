@@ -184,4 +184,13 @@ class MenuTest extends TestCase
         $this->assertNotNull($menu);
     }
 
+    /** @test */
+    function it_gets_all_menus_raw()
+    {
+        $menuFactory = new MenuFactory();
+        $menu = $menuFactory->findRaw();
+        // terrible test, should be more descriptive
+        $this->assertNotNull($menu);
+    }
+
 }

@@ -73,24 +73,38 @@ class Menu
         return $items;
     }
 
-    public function findRaw($id)
+    public function findRaw($id = null)
     {
-        $menuItems = MenuModel::find($id)
-            ->first()
-            ->with('menu_items')
-            ->with(['menu_items' => function ($query) {
-                $query->whereNotIn(
-                    'menu_items.id',
-                    ChildMenuItem::select('child_id')->get()->toArray()
-                )
-                ->with(['children' => function($query2) {
-                    $query2->with('child_item');
-                }]);
-            }])
-            ->get()
-            ->toArray();
-
-        return $menuItems;
+        $menu = [];
+        if(is_null($id)) {
+            $menu = MenuModel::with('menu_items')
+                ->with(['menu_items' => function ($query) {
+                    $query->whereNotIn(
+                        'menu_items.id',
+                        ChildMenuItem::select('child_id')->get()->toArray()
+                    )
+                        ->with(['children' => function($query2) {
+                            $query2->with('child_item');
+                        }]);
+                }])
+                ->get();
+        }
+        else {
+            $menu = MenuModel::find($id)
+                ->first()
+                //->with('menu_items')
+                ->with(['menu_items' => function ($query) {
+                    $query->whereNotIn(
+                        'menu_items.id',
+                        ChildMenuItem::select('child_id')->get()->toArray()
+                    )
+                        ->with(['children' => function($query2) {
+                            $query2->with('child_item');
+                        }]);
+                }])
+                ->first();
+        }
+        return json_decode(json_encode($menu));
     }
 
     /**
