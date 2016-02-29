@@ -31,7 +31,7 @@ class MenuTest extends TestCase
 
         $menu = $menuRepo->find($name);
         $this->assertEquals($name, $menu->name);
-
+        
         $this->assertGreaterThan(0, count($menu->menu_items));
 
     }

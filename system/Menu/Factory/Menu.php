@@ -26,7 +26,6 @@ class Menu
         }
 
         $this->buildMenu($name);
-
         return json_decode(json_encode($this->menu));
     }
 
@@ -130,21 +129,22 @@ class Menu
      */
     protected function buildMenu($name)
     {
-        $menuItems = MenuModel::where('menus.name', '=', $name)
+        $menu = MenuModel::where('menus.name', '=', $name)
             ->first()
-            ->menu_items()
-            ->whereNotIn(
-                'menu_items.id',
-                ChildMenuItem::select('child_id')->get()->toArray()
-            )
-            ->get();
+            ->with(['menu_items' => function ($query) {
+                $query->whereNotIn(
+                    'menu_items.id',
+                    ChildMenuItem::select('child_id')->get()->toArray()
+                );
+            }])
+            ->first();
 
         $this->menu = [
             'name' => $name,
             'menu_items' => []
         ];
 
-        foreach($menuItems as $key => $item) {
+        foreach($menu->menu_items as $key => $item) {
 
             $this->menu['menu_items'][] = $this->formatMenuItem($item);
 
