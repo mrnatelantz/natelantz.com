@@ -30,9 +30,9 @@ class MenuTest extends TestCase
         $menuRepo = new MenuFactory();
 
         $menu = $menuRepo->find($name);
-        $this->assertEquals($name, $menu->name);
-        
-        $this->assertGreaterThan(0, count($menu->menu_items));
+        $this->assertEquals($name, $menu['name']);
+
+        $this->assertGreaterThan(0, count($menu['menu_items']));
 
     }
 

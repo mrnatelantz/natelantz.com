@@ -10,7 +10,7 @@ use RadCms\Menu\Models\MenuItem;
 class Menu
 {
 
-    protected $menu = [];
+    protected $menu;
 
     /**
      * @param null $name
@@ -26,7 +26,7 @@ class Menu
         }
 
         $this->buildMenu($name);
-        return json_decode(json_encode($this->menu));
+        return $this->menu;
     }
 
     /**
@@ -103,7 +103,7 @@ class Menu
                 }])
                 ->first();
         }
-        return json_decode(json_encode($menu));
+        return $this->addToCollection($menu);
     }
 
     /**
@@ -154,8 +154,19 @@ class Menu
             }
             $this->menu['menu_items'][$key]['children'] = $children;
         }
+        $this->menu = $this->addToCollection($this->menu);
+        Cache::forever('RadCms.menu.'.$name, $this->menu);
 
-        Cache::forever('RadCms.menu.'.$name, json_decode(json_encode($this->menu)));
+    }
+
+    protected function addToCollection($data, $asObject = true)
+    {
+        if($asObject) {
+            return collect(json_decode(json_encode($data)));
+        }
+        else {
+            return $data;
+        }
 
     }
 
