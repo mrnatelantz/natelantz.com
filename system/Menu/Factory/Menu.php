@@ -26,8 +26,9 @@ class Menu
         }
 
         $this->buildMenu($name);
-        return $this->menu;
+        return $this->menu->first();
     }
+    
 
     /**
      * @param array $menu
@@ -87,11 +88,11 @@ class Menu
                         }]);
                 }])
                 ->get();
+            return $this->addToCollection($menu->toArray());
         }
         else {
             $menu = MenuModel::find($id)
                 ->first()
-                //->with('menu_items')
                 ->with(['menu_items' => function ($query) {
                     $query->whereNotIn(
                         'menu_items.id',
@@ -102,8 +103,10 @@ class Menu
                         }]);
                 }])
                 ->first();
+            return $this->addToCollection([$menu->toArray()]);
         }
-        return $this->addToCollection($menu);
+
+
     }
 
     /**
@@ -154,7 +157,7 @@ class Menu
             }
             $this->menu['menu_items'][$key]['children'] = $children;
         }
-        $this->menu = $this->addToCollection($this->menu);
+        $this->menu = $this->addToCollection([$this->menu]);
         Cache::forever('RadCms.menu.'.$name, $this->menu);
 
     }

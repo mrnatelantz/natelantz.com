@@ -30,9 +30,10 @@ class MenuTest extends TestCase
         $menuRepo = new MenuFactory();
 
         $menu = $menuRepo->find($name);
-        $this->assertEquals($name, $menu['name']);
+        dd($menu);
+        $this->assertEquals($name, $menu->name);
 
-        $this->assertGreaterThan(0, count($menu['menu_items']));
+        $this->assertGreaterThan(0, count($menu->menu_items));
 
     }
 
@@ -189,6 +190,7 @@ class MenuTest extends TestCase
     {
         $menuFactory = new MenuFactory();
         $menu = $menuFactory->findRaw();
+
         // terrible test, should be more descriptive
         $this->assertNotNull($menu);
     }
