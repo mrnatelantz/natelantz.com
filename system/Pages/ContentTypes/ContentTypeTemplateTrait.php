@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * I have no idea why I made this. It's not being used
+ */
 
 namespace RadCms\Pages\ContentTypes;
 
@@ -15,6 +17,7 @@ trait ContentTypeTemplateTrait
         $this->viewInfo = $this->searchContentTypes($viewName, $this->contentTypes);
         return $this->loadView();
     }
+
 
     public function viewInfo($viewName = null)
     {
