@@ -25,50 +25,26 @@
         </div>
         <hr />
 
-        @include('pages::admin.partials.content-type-selector')
+
 
         <div class="clearfix"></div>
-        <div class="content-types">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                @if(isset($page) && isset($page->content))
-                    @foreach($page->content as $contentTypes)
-                        @foreach($contentTypes as $type => $content)
-                            <?php $orderCount = 0; ?>
-                            @if(View::exists('admin.content-types.body.'.$type))
-                                <?php $contentType = [
-                                        'content' => $content,
-                                        'orderByCount' => $orderCount++,
-                                        'ajax' => false
-                                ]; ?>
-                                    @include('admin.content-types.body.'.$type, ['contentType' => $contentType])
-                            @elseif(View::exists('pages::admin.content-types.body.'.$type))
-                                <?php $contentType = [
-                                        'content' => $content,
-                                        'orderByCount' => $orderCount++,
-                                        'ajax' => false
-                                ]; ?>
-                                @include('pages::admin.content-types.body.'.$type, ['contentType' => $contentType])
-                            @endif
-                        @endforeach
-                    @endforeach
-                @else
-                    @if(View::exists('admin.content-types.body.wysiwyg'))
-                        <?php $contentType = [
-                                'content' => '',
-                                'orderByCount' => 0,
-                                'ajax' => false
-                        ]; ?>
-                        @include('admin.content-types.body.wysiwyg', ['contentType' => $contentType])
-                    @elseif(View::exists('pages::admin.content-types.body.wysiwyg'))
-                        <?php $contentType = [
-                                'content' => '',
-                                'orderByCount' => 0,
-                                'ajax' => false
-                        ]; ?>
-                        @include('pages::admin.content-types.body.wysiwyg', ['contentType' => $contentType])
-                    @endif
-                @endif
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"><a href="#head-content-types-panel" aria-controls="head-content-types-panel" role="tab" data-toggle="tab">Head</a></li>
+            <li role="presentation" class="active"><a href="#body-content-types-panel" aria-controls="body-content-types-panel" role="tab" data-toggle="tab">Body</a></li>
+            <li role="presentation"><a href="#foot-content-types-panel" aria-controls="foot-content-types-panel" role="tab" data-toggle="tab">Foot</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade" id="head-content-types-panel">
+
             </div>
+            <div role="tabpanel" class="tab-pane active fade in" id="body-content-types-panel">
+                @include('pages::admin.partials.body-content-types')
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="foot-content-types-panel">
+
+            </div>
+
         </div>
 
         @if(isset($page))
@@ -152,6 +128,7 @@
         {{-- This is getting dirty --}}
         {{-- @todo move this into a js file --}}
         $(document).ready(function() {
+
             $.each($('.wysiwyg'), function() {
                 var ele = $(this).attr('data-id');
                 $('.wysiwyg-' + ele).summernote({
@@ -195,27 +172,28 @@
             $('.content-type-select').on('click', function(event) {
                 var url = $(this).attr('data-href');
                 $.get(url, function( data ) {
-                    $('.content-types').append(data.html);
+                    $('.body-content-types').append($(data.html));
                 });
                 event.preventDefault();
             });
 
-            $('.content-types').on('click', '.remove-content-type-btn', function(event) {
+            $('.body-content-types').on('click', '.remove-content-type-btn', function(event) {
                 event.preventDefault();
                 var id = $(this).attr('data-id');
-                var removeElements = $('.content-types').find('[data-id="'+ id +'"]');
+                var removeElements = $('.body-content-types').find('[data-id="'+ id +'"]');
                 $(removeElements).remove();
             });
 
             // move content type up or down
-            $('.content-types').on('click', '.move-content-type-btn', function(event) {
+            $('.body-content-types').on('click', '.move-content-type-btn', function(event) {
                 event.preventDefault();
                 var id = $(this).attr('data-id');
                 var direction = $(this).attr('data-direction');
+
                 if(direction == 'up') {
-                    var element = $(this).closest('div.content-type.group');
+                    var element = $('div.content-type.group[data-id="' + id + '"]');
                     var prependElement = $(element).prev($('div.content-type.group'));
-                    $(element).insertBefore($(prependElement));
+                    $(element).insertBefore(prependElement);
 
                     // ghetto, needs to be a css class
                     $(this).addClass('btn-success');
@@ -225,7 +203,7 @@
 
                 }
                 else if(direction == 'down') {
-                    var element = $(this).closest('div.content-type.group');
+                    var element = $('div.content-type.group[data-id="' + id + '"]');
                     var afterElement = $(element).next($('div.content-type.group'));
                     $(element).insertAfter($(afterElement));
 
