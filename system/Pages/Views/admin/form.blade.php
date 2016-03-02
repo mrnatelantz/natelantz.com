@@ -152,10 +152,15 @@
         {{-- This is getting dirty --}}
         {{-- @todo move this into a js file --}}
         $(document).ready(function() {
-            //$('.wysiwyg').summernote();
             $.each($('.wysiwyg'), function() {
                 var ele = $(this).attr('data-id');
-                $('.wysiwyg-' + ele).summernote();
+                $('.wysiwyg-' + ele).summernote({
+                    height: 300,
+                    disableDragAndDrop: true,
+                    codemirror: {
+                        theme: 'monokai'
+                    }
+                });
             });
 
             $('.submit-button').on('click', function(event) {

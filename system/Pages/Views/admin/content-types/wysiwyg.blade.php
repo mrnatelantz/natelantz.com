@@ -49,7 +49,13 @@
 
 @if(isset($contentType) && $contentType['ajax'])
     <script data-id="{{ $rand }}">
-        jQuery(".wysiwyg-{{ $rand }}").summernote();
+        jQuery(".wysiwyg-{{ $rand }}").summernote({
+            height: 300,
+            disableDragAndDrop: true,
+            codemirror: {
+                theme: 'monokai'
+            }
+        });
     </script>
 @endif
 
