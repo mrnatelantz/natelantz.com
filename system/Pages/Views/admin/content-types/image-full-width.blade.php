@@ -1,41 +1,45 @@
-<?php $time = rand(); ?>
+<?php $rand = rand(); ?>
 
 @if(isset($contentType))
-    <div class="content-type group" data-orderby="{{ $contentType['orderByCount'] or null }}" data-id="{{ $time }}">
-        @else
-            <div class="content-type group" data-orderby="" data-id="{{ $time }}">
-                @endif
-                <button class="btn btn-default move-content-type-btn" data-id="{{ $time }}" data-direction="down">
-                    <i class="glyphicon glyphicon-arrow-down"></i>
-                </button>
-                <button class="btn btn-default move-content-type-btn" data-id="{{ $time }}" data-direction="up">
-                    <i class="glyphicon glyphicon-arrow-up"></i>
-                </button>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#{{ $time }}">
-                    IMAGE - FULL WIDTH
-                </button>
-                <button class="btn btn-danger remove-content-type-btn" data-id="{{ $time }}">
+<div class="panel panel-default content-type group" data-orderby="{{ $contentType['orderByCount'] or null }}" data-id="{{ $rand }}">
+@else
+<div class="panel panel-default content-type group" data-orderby="" data-id="{{ $rand }}">
+@endif
+    <div class="panel-heading" role="tab" id="headingOne-{{ $rand }}">
+        <h4 class="panel-title">
+            <div class="col-md-3">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-xs btn-default move-content-type-btn" data-id="{{ $rand }}" data-direction="down">
+                        <i class="glyphicon glyphicon-arrow-down"></i>
+                    </button>
+                    <button class="btn btn-xs btn-default move-content-type-btn" data-id="{{ $rand }}" data-direction="up">
+                        <i class="glyphicon glyphicon-arrow-up"></i>
+                    </button>
+                </div>
+                <button class="btn btn-xs btn-danger remove-content-type-btn" data-id="{{ $rand }}">
                     <i class="glyphicon glyphicon-remove"></i>
                 </button>
-                <div class="modal fade" id="{{ $time }}" tabindex="-1" role="dialog" aria-labelledby="{{ $time }}-Label">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="{{ $time }}-Label">Content Type: HTML</h4>
-                            </div>
-                            <div class="modal-body">
-                                <input class="content-type-field image-full-width-{{ $time }} form-control"
-                                       data-contentType="image-full-width"
-                                       data-id="{{ $time }}"
-                                       value="{{ $contentType['content'] or null }}"
-                                       placeholder="http://domain.com/image.png">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr />
             </div>
+
+            <div class="col-md-3">
+                <a class="collapsed" aria-expanded="false" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne-{{ $rand }}"  aria-controls="collapseOne-{{ $rand }}">
+                    Image Full Width
+                </a>
+            </div>
+
+            <div class="clearfix"></div>
+        </h4>
+    </div>
+
+    <div id="collapseOne-{{ $rand }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne-{{ $rand }}">
+        <div class="panel-body">
+            <input class="content-type-field image-full-width-{{ $rand }} form-control"
+                   data-contentType="image-full-width"
+                   data-id="{{ $rand }}"
+                   value="{{ $contentType['content'] or null }}"
+                   placeholder="http://domain.com/image.png">
+        </div>
+    </div>
+</div>
+
+<?php unset($rand); ?>

@@ -29,44 +29,46 @@
 
         <div class="clearfix"></div>
         <div class="content-types">
-            @if(isset($page) && isset($page->content))
-                @foreach($page->content as $contentTypes)
-                    @foreach($contentTypes as $type => $content)
-                        <?php $orderCount = 0; ?>
-                        @if(View::exists('admin.content-types.'.$type))
-                            <?php $contentType = [
-                                    'content' => $content,
-                                    'orderByCount' => $orderCount++,
-                                    'ajax' => false
-                            ]; ?>
-                                @include('admin.content-types.'.$type, ['contentType' => $contentType])
-                        @elseif(View::exists('pages::admin.content-types.'.$type))
-                            <?php $contentType = [
-                                    'content' => $content,
-                                    'orderByCount' => $orderCount++,
-                                    'ajax' => false
-                            ]; ?>
-                            @include('pages::admin.content-types.'.$type, ['contentType' => $contentType])
-                        @endif
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @if(isset($page) && isset($page->content))
+                    @foreach($page->content as $contentTypes)
+                        @foreach($contentTypes as $type => $content)
+                            <?php $orderCount = 0; ?>
+                            @if(View::exists('admin.content-types.'.$type))
+                                <?php $contentType = [
+                                        'content' => $content,
+                                        'orderByCount' => $orderCount++,
+                                        'ajax' => false
+                                ]; ?>
+                                    @include('admin.content-types.'.$type, ['contentType' => $contentType])
+                            @elseif(View::exists('pages::admin.content-types.'.$type))
+                                <?php $contentType = [
+                                        'content' => $content,
+                                        'orderByCount' => $orderCount++,
+                                        'ajax' => false
+                                ]; ?>
+                                @include('pages::admin.content-types.'.$type, ['contentType' => $contentType])
+                            @endif
+                        @endforeach
                     @endforeach
-                @endforeach
-            @else
-                @if(View::exists('admin.content-types.wysiwyg'))
-                    <?php $contentType = [
-                            'content' => '',
-                            'orderByCount' => 0,
-                            'ajax' => false
-                    ]; ?>
-                    @include('admin.content-types.wysiwyg', ['contentType' => $contentType])
-                @elseif(View::exists('pages::admin.content-types.wysiwyg'))
-                    <?php $contentType = [
-                            'content' => '',
-                            'orderByCount' => 0,
-                            'ajax' => false
-                    ]; ?>
-                    @include('pages::admin.content-types.wysiwyg', ['contentType' => $contentType])
+                @else
+                    @if(View::exists('admin.content-types.wysiwyg'))
+                        <?php $contentType = [
+                                'content' => '',
+                                'orderByCount' => 0,
+                                'ajax' => false
+                        ]; ?>
+                        @include('admin.content-types.wysiwyg', ['contentType' => $contentType])
+                    @elseif(View::exists('pages::admin.content-types.wysiwyg'))
+                        <?php $contentType = [
+                                'content' => '',
+                                'orderByCount' => 0,
+                                'ajax' => false
+                        ]; ?>
+                        @include('pages::admin.content-types.wysiwyg', ['contentType' => $contentType])
+                    @endif
                 @endif
-            @endif
+            </div>
         </div>
 
         @if(isset($page))
