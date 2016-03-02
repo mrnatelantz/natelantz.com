@@ -109,12 +109,13 @@
             </div>
             <div class="form-group">
                 <label for="template">Template</label>
-                <input type="text"
-                       name="template"
-                       id="template"
-                       class="form-control template"
-                       placeholder="Template"
-                       value="{{ $page->template or null }}">
+                @if(isset($templates))
+                    <select name="template" class="form-control template">
+                        @foreach($templates as $template)
+                            <option value="{{ $template }}" @if($page->template == $template) selected  @endif>{{ ucfirst($template) }}</option>
+                        @endforeach
+                    </select>
+                @endif
             </div>
             <div class="form-group">
                 <label for="publish_date">Publish Date</label>

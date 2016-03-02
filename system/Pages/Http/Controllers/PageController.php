@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use RadCms\Pages\Models\Page;
 use RadCms\Pages\Models\PageVersions;
 use View;
+use RadCms\Pages\Templates\Template;
 
 class PageController extends Controller
 {
@@ -19,7 +20,8 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('pages::admin.index', ['pages' => Page::all()]);
+        return view('pages::admin.index', [
+            'pages' => Page::all()]);
     }
 
     /**
@@ -29,7 +31,10 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('pages::admin.form');
+        $templates = new Template();
+        return view('pages::admin.form',[
+            'templates' => $templates->all()
+        ]);
     }
 
     /**
@@ -68,13 +73,19 @@ class PageController extends Controller
      */
     public function show($id)
     {
+        $templates = new Template();
+
         $page = PageVersions::where('page_id', '=', $id)
             ->orderBy('id', 'desc')
             ->first();
         $versions = PageVersions::where('page_id', '=', $id)
                     ->orderBy('id', 'desc')
                     ->get();
-        return view('pages::admin.form', ['page' => $page, 'versions' => $versions]);
+        return view('pages::admin.form', [
+            'page'      => $page,
+            'versions'  => $versions,
+            'templates' => $templates->all()
+        ]);
     }
 
     /**
