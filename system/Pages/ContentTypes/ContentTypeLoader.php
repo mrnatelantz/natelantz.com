@@ -7,8 +7,8 @@ use RadCms\Pages\ContentTypes\ContentTypeInterface;
 class ContentTypeLoader implements ContentTypeInterface
 {
     protected $systemDir = '';
-    protected $systemViewPrefix = 'pages::admin.content-types.';
-    protected $customViewPrefix = 'admin.content-types.';
+    protected $systemViewPrefix = 'pages::admin.content-types.body.';
+    protected $customViewPrefix = 'admin.content-types.body.';
     protected $customDir = [];
     protected $contentTypes = [];
 

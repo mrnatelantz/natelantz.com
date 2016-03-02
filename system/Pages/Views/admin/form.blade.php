@@ -34,38 +34,38 @@
                     @foreach($page->content as $contentTypes)
                         @foreach($contentTypes as $type => $content)
                             <?php $orderCount = 0; ?>
-                            @if(View::exists('admin.content-types.'.$type))
+                            @if(View::exists('admin.content-types.body.'.$type))
                                 <?php $contentType = [
                                         'content' => $content,
                                         'orderByCount' => $orderCount++,
                                         'ajax' => false
                                 ]; ?>
-                                    @include('admin.content-types.'.$type, ['contentType' => $contentType])
-                            @elseif(View::exists('pages::admin.content-types.'.$type))
+                                    @include('admin.content-types.body.'.$type, ['contentType' => $contentType])
+                            @elseif(View::exists('pages::admin.content-types.body.'.$type))
                                 <?php $contentType = [
                                         'content' => $content,
                                         'orderByCount' => $orderCount++,
                                         'ajax' => false
                                 ]; ?>
-                                @include('pages::admin.content-types.'.$type, ['contentType' => $contentType])
+                                @include('pages::admin.content-types.body.'.$type, ['contentType' => $contentType])
                             @endif
                         @endforeach
                     @endforeach
                 @else
-                    @if(View::exists('admin.content-types.wysiwyg'))
+                    @if(View::exists('admin.content-types.body.wysiwyg'))
                         <?php $contentType = [
                                 'content' => '',
                                 'orderByCount' => 0,
                                 'ajax' => false
                         ]; ?>
-                        @include('admin.content-types.wysiwyg', ['contentType' => $contentType])
-                    @elseif(View::exists('pages::admin.content-types.wysiwyg'))
+                        @include('admin.content-types.body.wysiwyg', ['contentType' => $contentType])
+                    @elseif(View::exists('pages::admin.content-types.body.wysiwyg'))
                         <?php $contentType = [
                                 'content' => '',
                                 'orderByCount' => 0,
                                 'ajax' => false
                         ]; ?>
-                        @include('pages::admin.content-types.wysiwyg', ['contentType' => $contentType])
+                        @include('pages::admin.content-types.body.wysiwyg', ['contentType' => $contentType])
                     @endif
                 @endif
             </div>
@@ -112,7 +112,7 @@
                 @if(isset($templates))
                     <select name="template" class="form-control template">
                         @foreach($templates as $template)
-                            <option value="{{ $template }}" @if($page->template == $template) selected  @endif>{{ ucfirst($template) }}</option>
+                            <option value="{{ $template }}" @if(isset($page->template) && $page->template == $template) selected  @endif>{{ ucfirst($template) }}</option>
                         @endforeach
                     </select>
                 @endif
