@@ -7,7 +7,7 @@
             @foreach($contentTypes as $type)
                 @if(isset($type['name']))
                     <li>
-                        <a href="#" class="content-type-select" data-href="{{ route('pages.contentType', ['name' => $type['name']]) }}">{{ strtoupper($type['name']) }}</a>
+                        <a href="#" class="content-type-select" data-href="{{ route('pages.contentType', ['name' => 'body.'.$type['name']]) }}">{{ strtoupper($type['name']) }}</a>
                     </li>
                 @endif
             @endforeach

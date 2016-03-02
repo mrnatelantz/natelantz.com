@@ -10,9 +10,9 @@ class AdminContentType extends ContentTypeLoader
 
     public function __construct()
     {
-        $this->systemDir = __DIR__ . '/../Views/admin/content-types/body/';
+        $this->systemDir = __DIR__ . '/../Views/admin/content-types/';
         foreach(Config::get('view.paths') as $path) {
-            $this->customDir[] = $path.'/admin/content-types/body/';
+            $this->customDir[] = $path.'/admin/content-types/';
         }
     }
 

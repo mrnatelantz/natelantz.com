@@ -7,4 +7,10 @@ interface ContentTypeInterface
 {
 
     public function all();
+
+    public function head();
+
+    public function body();
+
+    public function foot();
 }

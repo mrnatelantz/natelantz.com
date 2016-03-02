@@ -34,6 +34,6 @@ class ContentSelectorViewComposer
      */
     public function compose(View $view)
     {
-        $view->with('contentTypes', $this->contentTypes->all());
+        $view->with('contentTypes', $this->contentTypes->body());
     }
 }

@@ -7,15 +7,48 @@ use RadCms\Pages\ContentTypes\ContentTypeInterface;
 class ContentTypeLoader implements ContentTypeInterface
 {
     protected $systemDir = '';
-    protected $systemViewPrefix = 'pages::admin.content-types.body.';
-    protected $customViewPrefix = 'admin.content-types.body.';
+    protected $systemViewPrefix = 'pages::admin.content-types.';
+    protected $customViewPrefix = 'admin.content-types.';
     protected $customDir = [];
     protected $contentTypes = [];
+    protected $headTypes = [];
+    protected $location = '';
 
     public function all()
     {
-        $this->loadTemplates();
-        return $this->contentTypes;
+        $contentTypes = [
+            'head' => $this->head(),
+            'body' => $this->body(),
+            'foot' => $this->foot()
+        ];
+        return $contentTypes;
+    }
+
+    public function head()
+    {
+        return $this->setLocationPath('head')
+                    ->loadTemplates();
+
+    }
+
+    public function body()
+    {
+        return $this->setLocationPath('body')
+            ->loadTemplates();
+
+    }
+
+    public function foot()
+    {
+        return $this->setLocationPath('foot')
+            ->loadTemplates();
+    }
+
+
+
+    protected function setLocationPath($location) {
+        $this->location = $location;
+        return $this;
     }
 
     /**
@@ -52,19 +85,20 @@ class ContentTypeLoader implements ContentTypeInterface
      */
     protected function loadTemplates()
     {
+        $contentTypeTemplate = [];
         // Load the system content types
-        foreach(glob($this->systemDir.'*.blade.php') as $file) {
-            $this->addContentType($file, $this->systemViewPrefix);
+        foreach(glob($this->systemDir. $this->location .'/*.blade.php') as $file) {
+            $contentTypeTemplate = array_merge($contentTypeTemplate, $this->addContentType($file, $this->systemViewPrefix . $this->location .'.'));
         }
 
         // load the custom content types
         foreach($this->customDir as $path) {
-            foreach(glob($path.'*.blade.php') as $file) {
-                $this->addContentType($file, $this->customViewPrefix);
+            foreach(glob($path. $this->location . '/*.blade.php') as $file) {
+                $contentTypeTemplate = array_merge($contentTypeTemplate, $this->addContentType($file, $this->customViewPrefix . $this->location . '.'));
             }
         }
 
-        return $this;
+        return $contentTypeTemplate;
     }
 
     /**
@@ -73,18 +107,19 @@ class ContentTypeLoader implements ContentTypeInterface
      */
     protected function addContentType($file, $viewPrefix)
     {
+        $contentTypes = [];
         $viewArray = explode('/', $file);
         $viewFile = end($viewArray);
         $contentTypeName = explode('.', $viewFile)[0];
         $this->filterContentTypes($contentTypeName);
         $viewName = $viewPrefix . $contentTypeName;
-        $this->contentTypes[] = [
+        $contentTypes[] = [
             'name' => $contentTypeName,
             'real_path' => $file,
             'view_name' => $viewName,
         ];
 
-        $this->contentTypes = $this->cleanUpContentTypes($this->contentTypes);
+        return $this->cleanUpContentTypes($contentTypes);
     }
 
     /**
