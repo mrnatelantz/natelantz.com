@@ -28,7 +28,7 @@ class Menu
         $this->buildMenu($name);
         return $this->menu->first();
     }
-    
+
 
     /**
      * @param array $menu
@@ -71,6 +71,25 @@ class Menu
         // rebuild menu cache
         $this->buildMenu($menuName);
         return $items;
+    }
+
+    /**
+     * @param array $menu_item
+     * @return null
+     */
+    public function updateItem(array $menu_item = [])
+    {
+        if(!isset($menu_item['menu_id'])){ return null; }
+        $id = $menu_item['menu_id'];
+        return MenuItem::where('id', '=', $id)
+            ->update($menu_item);
+
+    }
+
+
+    public function destroyItem($id)
+    {
+        return MenuItem::destroy($id);
     }
 
     public function findRaw($id = null)

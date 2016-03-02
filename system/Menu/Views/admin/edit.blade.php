@@ -2,13 +2,22 @@
 
 @section('body')
     @if(isset($menu))
-        <div class="form">
-            <input class="form-control" value="{{ $menu->name or null }}">
-            <ul>
-                @if(isset($menu->child))
+        <div class="form col-md-6 form-horizontal">
 
+            <div class="form-group">
+
+                <div class="col-sm-12">
+                    <input class="form-control" value="{{ $menu->name or null }}">
+                </div>
+            </div>
+            <div class="panel-group col-md-offset-1" id="accordion" role="tablist" aria-multiselectable="true">
+                @if(isset($menu->menu_items) && count($menu->menu_items))
+                    @foreach($menu->menu_items as $menu_item)
+                        @include('menu::admin.partials.menu_item', ['menu_item' => $menu_item, 'menu_id' => $menu->id])
+                    @endforeach
                 @endif
-            </ul>
+                @include('menu::admin.partials.menu_item', ['menu_item' => null, 'menu_id' => $menu->id])
+            </div>
         </div>
     @endif
 @endsection
