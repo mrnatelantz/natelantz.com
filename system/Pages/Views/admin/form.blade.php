@@ -6,27 +6,6 @@
 
 @section('body')
     <div class="col-sm-10">
-        <div class="input-fields">
-            <div class="form-group">
-                <input type="text"
-                       name="slug"
-                       class="form-control slug"
-                       placeholder="Slug"
-                       value="{{ $page->slug or null }}">
-            </div>
-            <div class="form-group">
-                <input type="text"
-                       name="name"
-                       class="form-control name"
-                       placeholder="Name"
-                       value="{{ $page->name or null }}">
-            </div>
-
-        </div>
-        <hr />
-
-
-
         <div class="clearfix"></div>
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"><a href="#head-content-types-panel" aria-controls="head-content-types-panel" role="tab" data-toggle="tab">Head</a></li>
@@ -68,6 +47,7 @@
                 <button class="btn btn-primary submit-button" data-action="{{ route('pages.post') }}">Save</button>
             @endif
         </div>
+
         @if(isset($page))
             <div class="form-group">
                 <a href="{{ route('pages.preview', ['id' => $page->page_id]) }}" target="_blank">Preview</a>
@@ -75,18 +55,40 @@
         @endif
         <div class="input-fields">
             <div class="form-group">
+                <label for="slug">Slug</label>
+                <input type="text"
+                       id="slug"
+                       name="slug"
+                       class="form-control slug"
+                       placeholder="Slug"
+                       value="{{ $page->slug or null }}"
+                       required aria-required="true">
+
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text"
+                       name="name"
+                       id="name"
+                       class="form-control name"
+                       placeholder="Name"
+                       value="{{ $page->name or null }}"
+                required aria-required="true">
+            </div>
+            <div class="form-group">
                 <label for="cover_image">Cover Image</label>
                 <input type="text"
                        name="cover_image"
                        id="cover_image"
                        class="form-control cover_image"
                        placeholder="Cover Image"
-                       value="{{ $page->cover_image or null }}">
+                       value="{{ $page->cover_image or null }}"
+                       aria-required="false">
             </div>
             <div class="form-group">
                 <label for="template">Template</label>
                 @if(isset($templates))
-                    <select name="template" class="form-control template">
+                    <select name="template" class="form-control template" required aria-required="true">
                         @foreach($templates as $template)
                             <option value="{{ $template }}" @if(isset($page->template) && $page->template == $template) selected  @endif>{{ ucfirst($template) }}</option>
                         @endforeach

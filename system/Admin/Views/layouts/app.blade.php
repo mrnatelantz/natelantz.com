@@ -89,16 +89,19 @@
         /*
          * Main content
          */
-
+        /*
         .main {
-            padding: 20px;
+            padding-top: 20px;
         }
+
         @media (min-width: 768px) {
             .main {
                 padding-right: 40px;
                 padding-left: 40px;
             }
         }
+        */
+
         .main .page-header {
             margin-top: 0;
         }
@@ -157,7 +160,7 @@
 
         <div class="row">
 
-            <div class="col-sm-12 main">
+            <div class="main">
                 @yield('content')
 
             </div>
