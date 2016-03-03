@@ -88,7 +88,8 @@ class PageController extends Controller
         return view('pages::admin.form', [
             'page'      => $page,
             'versions'  => $versions,
-            'templates' => $templates->all()
+            'templates' => $templates->all(),
+            'page_id'   => $id
         ]);
     }
 
@@ -214,5 +215,43 @@ class PageController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    /**
+     * Only checks for published pages
+     * Does not check page versions
+     * @param $slug
+     * @return \Illuminate\Http\JsonResponse
+     * @todo need to exclude the same page
+     */
+    public function checkSlug($page_id, $slug)
+    {
+        $page = Page::where('slug', '=', $slug)
+                        ->where('id', '<>', $page_id)
+                        ->select('id', 'slug', 'name', 'published')
+                        ->first();
+
+        if($page) {
+            if($page->published == 1){
+                return response()->json([
+                    'status' => true,
+                    'page' => $page
+                ]);
+            }
+            else {
+                return response()->json([
+                    'status' => false
+                ]);
+            }
+
+        }
+        else {
+            return response()->json([
+                'status' => false
+            ]);
+        }
+
+        return null;
+
     }
 }

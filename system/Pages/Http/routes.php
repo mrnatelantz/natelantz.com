@@ -12,6 +12,7 @@ Route::group(['namespace' => 'RadCms\Pages\Http\Controllers', 'middleware' => ['
     Route::get('admin/pages/{id}/preview', ['uses' => 'PageController@preview', 'as' => 'pages.preview']);
     Route::get('admin/pages/{id}/showVersion', ['uses' => 'PageController@showVersion', 'as' => 'pages.showVersion']);
     Route::get('admin/pages/contentType/{name}', ['uses' => 'PageController@getContentType', 'as' => 'pages.contentType']);
+    Route::get('admin/pages/checkSlug/{page_id}/{slug}', ['uses' => 'PageController@checkSlug', 'as' => 'pages.checkSlug']);
 
 });
 

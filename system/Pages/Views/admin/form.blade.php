@@ -2,6 +2,7 @@
 
 @push('css')
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+    <meta name="page_id" content="{{ $page_id or 0 }}">
 @endpush
 
 @section('body')
@@ -62,7 +63,9 @@
                        class="form-control slug"
                        placeholder="Slug"
                        value="{{ $page->slug or null }}"
+                       data-check-action="admin/pages/checkSlug"
                        required aria-required="true">
+                <span class="help-block hidden">Page with the same slug exists <a href=""></a> </span>
 
             </div>
             <div class="form-group">
@@ -142,7 +145,40 @@
                 });
             });
 
+            $('#slug').on('keyup', function(event){
+                var slug = $(this).val();
+                var url = $(this).attr('data-check-action');
+                var pageId = $('meta[name="page_id"]').attr('content');
+                var field = $(this);
+
+                $.get( "/" + url + '/' + pageId + '/' + slug )
+                        .done(function( data ) {
+                            if(data.status) {
+                                $(field).closest('.form-group').addClass('has-error');
+                                $(field).attr('data-error', true);
+                                var helpBlock = $(field).closest('.form-group').find('.help-block');
+                                $(helpBlock).find('a').attr('href', '/admin/pages/' + data.page.id);
+                                $(helpBlock).find('a').text(data.page.name);
+                                $(helpBlock).removeClass('hidden');
+
+                            }
+                            else {
+                                $(field).closest('.form-group').removeClass('has-error');
+                                $(field).attr('data-error', false);
+                                var helpBlock = $(field).closest('.form-group').find('.help-block');
+                                $(helpBlock).addClass('hidden');
+                                $(helpBlock).find('a').attr('href', '');
+                                $(helpBlock).find('a').text('');
+                            }
+                        });
+            });
+
             $('.submit-button').on('click', function(event) {
+
+                if($('input[data-error="true"]').length > 0) {
+                    event.preventDefault();
+                    return null;
+                }
 
                 if($('#submitForm').attr('action') == "") {
                     $('#submitForm').attr('action', $(this).attr('data-action'));
