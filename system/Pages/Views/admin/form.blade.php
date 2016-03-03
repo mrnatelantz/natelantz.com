@@ -36,13 +36,13 @@
 
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade" id="head-content-types-panel">
-
+                @include('pages::admin.partials.head-content-types')
             </div>
             <div role="tabpanel" class="tab-pane active fade in" id="body-content-types-panel">
                 @include('pages::admin.partials.body-content-types')
             </div>
             <div role="tabpanel" class="tab-pane fade" id="foot-content-types-panel">
-
+                @include('pages::admin.partials.foot-content-types')
             </div>
 
         </div>
@@ -145,51 +145,74 @@
                 if($('#submitForm').attr('action') == "") {
                     $('#submitForm').attr('action', $(this).attr('data-action'));
                 }
-                // get all of the dynamic content type values
-                $.each($('.content-type-field'), function() {
-                    var contentCount = $('input.contentType[type="hidden"]').length;
-                    var contentType = $(this).attr('data-contentType');
-                    var inputValue = '';
-                    if(contentType == 'wysiwyg') {
-                        inputValue = $(this).summernote('code');
-                    }
-                    else {
-                        inputValue = $(this).val();
-                    }
-                    var content = '<input type="hidden" name="content[' + contentCount + ']['+ contentType +']" value="' + inputValue + '" class="contentType">';
-                    $('form#submitForm').append(content);
-                });
 
                 // get the regular form fields, non dynamic content type
                 $.each($('.input-fields input'), function() {
                     var input = '<input type="hidden" name="' + $(this).attr('name') + '" value="' + $(this).val() + '">';
                     $('form#submitForm').append(input);
                 });
-                $('#submitForm').submit();
+
+                getInputFields('head');
+                getInputFields('body');
+                getInputFields('foot');
+
                 //event.preventDefault();
+                $('#submitForm').submit();
+
+
+                function getInputFields(location) {
+                    var locationSelector = '.' + location + '-content-types';
+                    $.each($(locationSelector + ' .content-type-field'), function() {
+
+                        var contentType = $(this).attr('data-contentType');
+                        var inputValue = '';
+                        if(contentType == 'wysiwyg') {
+                            inputValue = $(this).summernote('code');
+                        }
+                        else {
+                            inputValue = $(this).val();
+                        }
+                        // @todo rename content to body everywhere in app
+                        if(location == 'body') {
+                            location = 'content';
+                        }
+                        var contentCount = $('input.contentType[type="hidden"][data-location="' + location + '"]').length;
+                        var content = '<input type="hidden" ' +
+                                'name="' + location + '[' + contentCount + ']['+ contentType +']" ' +
+                                'value="' + inputValue + '" ' +
+                                'class="contentType" ' +
+                                'data-location="' + location + '">';
+                        $('form#submitForm').append(content);
+                    });
+
+                }
             });
 
             $('.content-type-select').on('click', function(event) {
                 var url = $(this).attr('data-href');
+                var location = $(this).attr('data-location');
                 $.get(url, function( data ) {
-                    $('.body-content-types').append($(data.html));
+                    var cssSelector = '.' + location + '-content-types';
+                    $(cssSelector).append($(data.html));
                 });
                 event.preventDefault();
             });
 
-            $('.body-content-types').on('click', '.remove-content-type-btn', function(event) {
+            $('.content-types').on('click', '.remove-content-type-btn', function(event) {
                 event.preventDefault();
                 var id = $(this).attr('data-id');
-                var removeElements = $('.body-content-types').find('[data-id="'+ id +'"]');
+                var location = $(this).closest('.content-types').attr('data-location');
+                var removeElements = $('.' + location + '-content-types').find('[data-id="'+ id +'"]');
                 $(removeElements).remove();
             });
 
             // move content type up or down
-            $('.body-content-types').on('click', '.move-content-type-btn', function(event) {
+            $('.content-types').on('click', '.move-content-type-btn', function(event) {
                 event.preventDefault();
                 var id = $(this).attr('data-id');
                 var direction = $(this).attr('data-direction');
-
+                var location = $(this).closest('.content-types').attr('data-location');
+                
                 if(direction == 'up') {
                     var element = $('div.content-type.group[data-id="' + id + '"]');
                     var prependElement = $(element).prev($('div.content-type.group'));

@@ -49,7 +49,9 @@ class PageController extends Controller
         $page->slug = $request->input('slug');
         $page->name = $request->input('name');
         $page->cover_image = $request->input('cover_image');
+        $page->head = $request->input('head');
         $page->content = $request->input('content');
+        //$page->foot = $request->input('foot');
         $page->template = $request->input('template');
         $page->save();
 
@@ -58,7 +60,9 @@ class PageController extends Controller
         $pageVersion->slug         = $request->input('slug');
         $pageVersion->name         = $request->input('name');
         $pageVersion->cover_image  = $request->input('cover_image');
+        $pageVersion->head         = $request->input('head');
         $pageVersion->content      = $request->input('content');
+        //$pageVersion->foot         = $request->input('foot');
         $pageVersion->template     = $request->input('template');
         $pageVersion->save();
 
@@ -122,7 +126,9 @@ class PageController extends Controller
             'slug' => $request->input('slug'),
             'name' => $request->input('name'),
             'cover_image' => $request->input('cover_image'),
+            'head' => $request->input('head'),
             'content' => $request->input('content'),
+            //'foot' => $request->input('foot'),
             'template' => $request->input('template')
         ]);
         return Redirect(route('pages.show', ['id' => $id]));
@@ -136,7 +142,9 @@ class PageController extends Controller
             'slug' => $request->input('slug'),
             'name' => $request->input('name'),
             'cover_image' => $request->input('cover_image'),
+            'head' => $request->input('head'),
             'content' => $request->input('content'),
+            //'foot' => $request->input('foot'),
             'template' => $request->input('template')
         ]);
 
@@ -145,7 +153,9 @@ class PageController extends Controller
                 'slug' => $request->input('slug'),
                 'name' => $request->input('name'),
                 'cover_image' => $request->input('cover_image'),
+                'head' => json_encode($request->input('head')), // mutator doesnt work on update
                 'content' => json_encode($request->input('content')), // mutator doesnt work on update
+                //'foot' => json_encode($request->input('foot')), // mutator doesnt work on update
                 'template' => $request->input('template'),
                 'published' => true
             ]);

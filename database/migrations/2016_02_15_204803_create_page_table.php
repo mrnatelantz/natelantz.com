@@ -17,7 +17,9 @@ class CreatePageTable extends Migration
             $table->string('slug')->unique();
             $table->string('name')->nullable();
             $table->string('cover_image')->nullable();
+            $table->longText('head')->nullable();
             $table->longText('content')->nullable();
+            $table->longText('foot')->nullable();
             $table->string('template')->nullable();
             $table->text('publish_date')->nullable();
             $table->text('unpublish_date')->nullable();

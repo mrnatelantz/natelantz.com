@@ -18,7 +18,9 @@ class CreatePageVersionsTable extends Migration
             $table->string('slug');
             $table->string('name')->nullable();
             $table->string('cover_image')->nullable();
+            $table->longText('head')->nullable();
             $table->longText('content')->nullable();
+            $table->longText('foot')->nullable();
             $table->string('template')->nullable();
             $table->timestamps();
         });

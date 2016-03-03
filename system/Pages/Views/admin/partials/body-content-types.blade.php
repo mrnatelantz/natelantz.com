@@ -1,7 +1,8 @@
 <div class="row">
 
     <div class="body-content-types col-md-10">
-        @if(isset($page) && isset($page->content))
+        @if(isset($page) && isset($page->content) && !is_null($page->content))
+
             @foreach($page->content as $contentTypes)
                 @foreach($contentTypes as $type => $content)
                     <?php $orderCount = 0; ?>

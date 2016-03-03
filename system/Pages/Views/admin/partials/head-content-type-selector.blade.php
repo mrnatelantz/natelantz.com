@@ -9,8 +9,8 @@
                     <li>
                         <a href="#"
                            class="content-type-select"
-                           data-href="{{ route('pages.contentType', ['name' => 'body.'.$type['name']]) }}"
-                           data-location="body">
+                           data-href="{{ route('pages.contentType', ['name' => 'head.'.$type['name']]) }}"
+                           data-location="head">
                             {{ strtoupper($type['name']) }}
                         </a>
                     </li>
