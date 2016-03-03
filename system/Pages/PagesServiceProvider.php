@@ -24,6 +24,9 @@ class PagesServiceProvider extends ServiceProvider
         view()->composer(
             'pages::admin.partials.head-content-type-selector', 'RadCms\Pages\Http\ViewComposers\HeadContentSelectorViewComposer'
         );
+        view()->composer(
+            'pages::admin.partials.foot-content-type-selector', 'RadCms\Pages\Http\ViewComposers\FootContentSelectorViewComposer'
+        );
     }
 
     /**

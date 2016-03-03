@@ -212,7 +212,7 @@
                 var id = $(this).attr('data-id');
                 var direction = $(this).attr('data-direction');
                 var location = $(this).closest('.content-types').attr('data-location');
-                
+
                 if(direction == 'up') {
                     var element = $('div.content-type.group[data-id="' + id + '"]');
                     var prependElement = $(element).prev($('div.content-type.group'));

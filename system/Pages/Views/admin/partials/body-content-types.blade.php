@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="body-content-types col-md-10">
+    <div class="body-content-types content-types col-md-10" data-location="body">
         @if(isset($page) && isset($page->content) && !is_null($page->content))
 
             @foreach($page->content as $contentTypes)
