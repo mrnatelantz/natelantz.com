@@ -1,6 +1,10 @@
 <div class="row">
 
-    <div class="head-content-types content-types col-md-10" data-location="head">
+    <div class="col-sm-12">
+        @include('pages::admin.partials.head-content-type-selector')
+    </div>
+
+    <div class="head-content-types content-types col-md-12" data-location="head">
         @if(isset($page) && isset($page->head) && !is_null($page->head))
             @foreach($page->head as $contentTypes)
                 @foreach($contentTypes as $type => $content)
@@ -57,7 +61,4 @@
         @endif
     </div>
 
-    <div class="col-md-2">
-        @include('pages::admin.partials.head-content-type-selector')
-    </div>
 </div>

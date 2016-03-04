@@ -1,6 +1,10 @@
 <div class="row">
 
-    <div class="foot-content-types content-types col-md-10" data-location="foot">
+    <div class="col-sm-12">
+        @include('pages::admin.partials.foot-content-type-selector')
+    </div>
+
+    <div class="foot-content-types content-types col-md-12" data-location="foot">
         @if(isset($page) && isset($page->foot) && !is_null($page->foot))
 
             @foreach($page->foot as $contentTypes)
@@ -26,7 +30,4 @@
         @endif
     </div>
 
-    <div class="col-md-2">
-        @include('pages::admin.partials.foot-content-type-selector')
-    </div>
 </div>

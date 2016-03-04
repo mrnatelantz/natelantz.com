@@ -1,7 +1,11 @@
 @if(isset($contentTypes))
     <div class="btn-group pull-right">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Add Content Type <span class="caret"></span>
+        <button type="button"
+                class="btn btn-default dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+                    <i class="glyphicon glyphicon-plus"></i>
         </button>
         <ul class="dropdown-menu">
             @foreach($contentTypes as $type)

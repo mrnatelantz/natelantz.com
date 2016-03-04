@@ -1,6 +1,9 @@
 <div class="row">
+    <div class="col-sm-12">
+        @include('pages::admin.partials.body-content-type-selector')
+    </div>
 
-    <div class="body-content-types content-types col-md-10" data-location="body">
+    <div class="body-content-types content-types col-md-12" data-location="body">
         @if(isset($page) && isset($page->content) && !is_null($page->content))
 
             @foreach($page->content as $key => $contentTypes)
@@ -43,7 +46,4 @@
         @endif
     </div>
 
-    <div class="col-md-2">
-        @include('pages::admin.partials.body-content-type-selector')
-    </div>
 </div>

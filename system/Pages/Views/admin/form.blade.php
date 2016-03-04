@@ -194,12 +194,20 @@
                 getInputFields('body');
                 getInputFields('foot');
 
-                event.preventDefault();
-                //$('#submitForm').submit();
+                //event.preventDefault();
+                $('#submitForm').submit();
 
 
                 function getInputFields(location) {
+
                     var locationSelector = '.' + location + '-content-types';
+
+                    // hack to assign the order of content types
+                    $.each($(locationSelector + ' .content-type'), function(key, ele){
+                       $(this).attr('data-orderby', key);
+                    });
+                    var contentCount = $(this).closest('.content-type').attr('data-orderby');
+
                     $.each($(locationSelector + ' .content-type-field'), function() {
 
                         var contentType = $(this).attr('data-contentType');
@@ -215,7 +223,7 @@
                         if(location == 'body') {
                             location = 'content';
                         }
-                        var contentCount = $('input.contentType[type="hidden"][data-location="' + location + '"]').length;
+
                         var content = '<input type="hidden" ' +
                                 'name="' + location + '[' + contentCount + ']['+ contentType +']['+ inputName +']" ' +
                                 'value="' + inputValue + '" ' +
