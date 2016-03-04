@@ -7,6 +7,7 @@
                 @foreach($contentTypes as $type => $content)
                     <?php $orderCount = 0; ?>
                     @if(View::exists('admin.content-types.body.'.$type))
+
                         <?php $contentType = [
                                 'content' => $content,
                                 'orderByCount' => $orderCount++,

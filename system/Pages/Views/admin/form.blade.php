@@ -194,8 +194,8 @@
                 getInputFields('body');
                 getInputFields('foot');
 
-                //event.preventDefault();
-                $('#submitForm').submit();
+                event.preventDefault();
+                //$('#submitForm').submit();
 
 
                 function getInputFields(location) {
@@ -204,6 +204,7 @@
 
                         var contentType = $(this).attr('data-contentType');
                         var inputValue = '';
+                        var inputName = $(this).attr('data-name');
                         if(contentType == 'wysiwyg') {
                             inputValue = $(this).summernote('code');
                         }
@@ -216,7 +217,7 @@
                         }
                         var contentCount = $('input.contentType[type="hidden"][data-location="' + location + '"]').length;
                         var content = '<input type="hidden" ' +
-                                'name="' + location + '[' + contentCount + ']['+ contentType +']" ' +
+                                'name="' + location + '[' + contentCount + ']['+ contentType +']['+ inputName +']" ' +
                                 'value="' + inputValue + '" ' +
                                 'class="contentType" ' +
                                 'data-location="' + location + '">';

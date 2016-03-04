@@ -34,10 +34,28 @@
 
     <div id="collapseOne-{{ $rand }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne-{{ $rand }}">
         <div class="panel-body">
-            <div class="wysiwyg content-type-field wysiwyg-{{ $rand }}" data-contentType="wysiwyg" data-id="{{ $rand }}">
-                @if(isset($contentType))
-                    {!! $contentType['content'] or null !!}
-                @endif
+            <div class="form-group">
+                <label for="styles-{{ $rand }}">Inline Styles</label>
+                <input type="text"
+                       name="styles"
+                       id="styles-{{ $rand }}"
+                       class="form-control content-type-field"
+                       data-contentType="wysiwyg"
+                       data-id="{{ $rand }}"
+                       data-name="styles"
+                       placeholder="color: #000000;"
+                       value="{{  $contentType['content']->styles or null }}">
+            </div>
+            <div class="form-group">
+                <label for="wysiwyg-{{ $rand }}">WYSIWYG Content</label>
+                <div class="wysiwyg content-type-field wysiwyg-{{ $rand }}"
+                     data-contentType="wysiwyg"
+                     data-id="{{ $rand }}"
+                     data-name="content">
+                        @if(isset($contentType))
+                            {!! $contentType['content']->content or null !!}
+                        @endif
+                </div>
             </div>
         </div>
     </div>

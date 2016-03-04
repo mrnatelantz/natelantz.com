@@ -35,11 +35,19 @@
 
                 <div id="collapseOne-{{ $rand }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne-{{ $rand }}">
                     <div class="panel-body">
-                <textarea class="content-type-field html-{{ $rand }} form-control" rows="10" data-contentType="html" data-id="{{ $rand }}">
-                        @if(isset($contentType))
-                        {!! $contentType['content'] or null !!}
-                    @endif
-                </textarea>
+                        <div class="form-group">
+                            <label for="html-{{ $rand }}">Content</label>
+                            <textarea class="content-type-field html-{{ $rand }} form-control"
+                                      id="html-{{ $rand }}"
+                                      data-name="content"
+                                      rows="10"
+                                      data-contentType="html"
+                                      data-id="{{ $rand }}">
+                                    @if(isset($contentType))
+                                    {!! $contentType['content']->content or null !!}
+                                @endif
+                            </textarea>
+                        </div>
                     </div>
                 </div>
             </div>

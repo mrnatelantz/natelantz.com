@@ -35,12 +35,17 @@
 
                 <div id="collapseOne-{{ $rand }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne-{{ $rand }}">
                     <div class="panel-body">
-                        <input type="text"
-                               data-contentType="css"
-                               data-id="{{ $rand }}"
-                               class="form-control content-type-field css-{{ $rand }}"
-                               placeholder="//domain.com/assets/css/app.css"
-                               @if(isset($contentType)) value="{{ $contentType['content'] or null }} @endif">
+                        <div class="form-group">
+                            <label for="css-{{ $rand }}">Content</label>
+                            <input type="text"
+                                   id="css-{{ $rand }}"
+                                   data-name="content"
+                                   data-contentType="css"
+                                   data-id="{{ $rand }}"
+                                   class="form-control content-type-field css-{{ $rand }}"
+                                   placeholder="//domain.com/assets/css/app.css"
+                                   @if(isset($contentType)) value="{{ $contentType['content']->content or null }} @endif">
+                        </div>
                     </div>
                 </div>
             </div>

@@ -33,11 +33,16 @@
 
                 <div id="collapseOne-{{ $rand }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne-{{ $rand }}">
                     <div class="panel-body">
-                        <input class="content-type-field image-full-width-{{ $rand }} form-control"
-                               data-contentType="script"
-                               data-id="{{ $rand }}"
-                               value="{{ $contentType['content'] or null }}"
-                               placeholder="//domain.com/assets/js/script.js">
+                        <div class="form-group">
+                            <label for="script-{{ $rand }}">Content</label>
+                            <input class="content-type-field image-full-width-{{ $rand }} form-control"
+                                   id="script-{{ $rand }}"
+                                   data-name="content"
+                                   data-contentType="script"
+                                   data-id="{{ $rand }}"
+                                   value="{{ $contentType['content']->content or null }}"
+                                   placeholder="//domain.com/assets/js/script.js">
+                        </div>
                     </div>
                 </div>
             </div>
