@@ -221,13 +221,18 @@
                             inputValue = $(this).val();
                         }
 
-                        var contentCount = $(this).closest('.content-type').attr('data-orderby');
-                        var content = '<input type="hidden" ' +
-                                'name="' + location + '[' + contentCount + ']['+ contentType +']['+ inputName +']" ' +
-                                'value="' + inputValue + '" ' +
-                                'class="contentType" ' +
-                                'data-location="' + location + '">';
-                        $('form#submitForm').append(content);
+                        // do not save content type if no value
+                        if(inputValue.length > 0) {
+                            var contentCount = $(this).closest('.content-type').attr('data-orderby');
+                            var content = '<input type="hidden" ' +
+                                    'name="' + location + '[' + contentCount + ']['+ contentType +']['+ inputName +']" ' +
+                                    'value="' + inputValue + '" ' +
+                                    'class="contentType" ' +
+                                    'data-location="' + location + '">';
+                            $('form#submitForm').append(content);
+                        }
+
+
                     });
 
                 }
