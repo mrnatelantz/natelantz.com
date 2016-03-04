@@ -30,5 +30,6 @@ class RadCmsServiceProvider extends ServiceProvider
         $this->app->register('RadCms\Admin\AdminServiceProvider');
         $this->app->register('RadCms\Pages\PagesServiceProvider');
         $this->app->register('RadCms\Menu\MenuServiceProvider');
+        $this->app->register('RadCms\Media\MediaServiceProvider');
     }
 }

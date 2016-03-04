@@ -1,15 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nlantz
- * Date: 3/4/16
- * Time: 11:05 AM
- */
 
 namespace RadCms\Media\Http\Controllers;
 
+use Illuminate\Http\Request;
 
-class MediaController
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class MediaController extends Controller
 {
+
+    public function index()
+    {
+        return view('media::admin.index');
+    }
 
 }
