@@ -205,7 +205,7 @@
                         var contentType = $(this).attr('data-contentType');
                         var inputValue = '';
                         var inputName = $(this).attr('data-name');
-                        if(contentType == 'wysiwyg') {
+                        if($(this).hasClass('wysiwyg')) {
                             inputValue = $(this).summernote('code');
                         }
                         else {

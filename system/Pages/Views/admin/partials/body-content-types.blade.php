@@ -3,7 +3,7 @@
     <div class="body-content-types content-types col-md-10" data-location="body">
         @if(isset($page) && isset($page->content) && !is_null($page->content))
 
-            @foreach($page->content as $contentTypes)
+            @foreach($page->content as $key => $contentTypes)
                 @foreach($contentTypes as $type => $content)
                     <?php $orderCount = 0; ?>
                     @if(View::exists('admin.content-types.body.'.$type))
