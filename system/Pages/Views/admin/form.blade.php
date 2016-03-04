@@ -27,25 +27,31 @@
 
         </div>
 
-        @if(isset($page))
-            <form action="" method="POST" id="submitForm" style="visibility: hidden;">
-                {{ csrf_field() }}
-                <input type="hidden" name="_method" value="PUT">
-            </form>
-        @else
-            <form action="{{ route('pages.post') }}" method="POST" id="submitForm" style="visibility: hidden;">
-                {{ csrf_field() }}
-            </form>
-        @endif
+        <form action="" method="POST" id="submitForm" style="visibility: hidden;">
+            {{ csrf_field() }}
+        </form>
+
     </div>
 
     <div class="col-sm-2 well">
         <div class="form-group submit-btns">
             @if(isset($page))
-                <button class="btn btn-default submit-button" data-action="{{ route('pages.update', ['id' => $page->page_id]) }}">Update</button>
-                <button class="btn btn-success submit-button" data-action="{{ route('pages.publish', ['id' => $page->page_id]) }}">Publish</button>
+                <button class="btn btn-default submit-button"
+                        data-action="{{ route('pages.update', ['id' => $page->page_id]) }}"
+                        data-method="PUT">
+                    Update
+                </button>
+                <button class="btn btn-success submit-button"
+                        data-action="{{ route('pages.publish', ['id' => $page->page_id]) }}"
+                        data-method="PUT">
+                    Publish
+                </button>
             @else
-                <button class="btn btn-primary submit-button" data-action="{{ route('pages.post') }}">Save</button>
+                <button class="btn btn-primary submit-button"
+                        data-action="{{ route('pages.post') }}"
+                        data-method="POST">
+                    Create
+                </button>
             @endif
         </div>
 
@@ -124,6 +130,25 @@
                 @endforeach
             </ul>
         @endif
+        <br>
+        <hr>
+
+        <div class="form-group submit-btns">
+            @if(isset($page))
+                @if($published)
+                    <button class="btn btn-warning submit-button"
+                            data-action="{{ route('pages.unPublish', ['id' => $page_id]) }}"
+                            data-method="PUT">
+                        Un-Publish
+                    </button>
+                @endif
+                <button class="btn btn-danger submit-button"
+                        data-action="{{ route('pages.delete', ['id' => $page_id]) }}"
+                        data-method="DELETE">
+                    Delete
+                </button>
+            @endif
+        </div>
     </div>
 @endsection
 
@@ -193,6 +218,11 @@
                 getInputFields('head');
                 getInputFields('body');
                 getInputFields('foot');
+
+                // set the http method spoofing
+                var methodType = $(this).attr('data-method');
+                var methodInput = '<input type="hidden" name="_method" value="' + methodType + '">';
+                $('#submitForm').append($(methodInput));
 
                 //event.preventDefault();
                 $('#submitForm').submit();

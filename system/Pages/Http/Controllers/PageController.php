@@ -66,7 +66,7 @@ class PageController extends Controller
         $pageVersion->template     = $request->input('template');
         $pageVersion->save();
 
-        return Redirect(route('pages.index'));
+        return redirect()->route('pages.show', ['id' => $pageVersion->id]);
     }
 
     /**
@@ -85,11 +85,15 @@ class PageController extends Controller
         $versions = PageVersions::where('page_id', '=', $id)
                     ->orderBy('id', 'desc')
                     ->get();
+        $published = Page::where('id', '=', $id)
+                        ->pluck('published')
+                        ->first();
         return view('pages::admin.form', [
             'page'      => $page,
             'versions'  => $versions,
             'templates' => $templates->all(),
-            'page_id'   => $id
+            'page_id'   => $id,
+            'published' => $published
         ]);
     }
 
@@ -172,7 +176,19 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Page::where('id', '=', $id)
+            ->delete();
+        PageVersions::where('page_id', '=', $id)
+            ->delete();
+        return redirect()->route('pages.index');
+    }
+
+    public function unPublish($id)
+    {
+        Page::where('id', '=', $id)
+            ->update(['published' => 0]);
+        return redirect()->route('pages.show', ['id' => $id]);
+
     }
 
     /**
