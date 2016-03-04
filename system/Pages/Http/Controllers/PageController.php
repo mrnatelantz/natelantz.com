@@ -50,7 +50,7 @@ class PageController extends Controller
         $page->name = $request->input('name');
         $page->cover_image = $request->input('cover_image');
         $page->head = $request->input('head');
-        $page->content = $request->input('content');
+        $page->body = $request->input('body');
         $page->foot = $request->input('foot');
         $page->template = $request->input('template');
         $page->save();
@@ -61,7 +61,7 @@ class PageController extends Controller
         $pageVersion->name         = $request->input('name');
         $pageVersion->cover_image  = $request->input('cover_image');
         $pageVersion->head         = $request->input('head');
-        $pageVersion->content      = $request->input('content');
+        $pageVersion->body         = $request->input('body');
         $pageVersion->foot         = $request->input('foot');
         $pageVersion->template     = $request->input('template');
         $pageVersion->save();
@@ -128,7 +128,7 @@ class PageController extends Controller
             'name' => $request->input('name'),
             'cover_image' => $request->input('cover_image'),
             'head' => $request->input('head'),
-            'content' => $request->input('content'),
+            'body' => $request->input('body'),
             'foot' => $request->input('foot'),
             'template' => $request->input('template')
         ]);
@@ -144,7 +144,7 @@ class PageController extends Controller
             'name' => $request->input('name'),
             'cover_image' => $request->input('cover_image'),
             'head' => $request->input('head'),
-            'content' => $request->input('content'),
+            'body' => $request->input('body'),
             'foot' => $request->input('foot'),
             'template' => $request->input('template')
         ]);
@@ -155,7 +155,7 @@ class PageController extends Controller
                 'name' => $request->input('name'),
                 'cover_image' => $request->input('cover_image'),
                 'head' => json_encode($request->input('head')), // mutator doesnt work on update
-                'content' => json_encode($request->input('content')), // mutator doesnt work on update
+                'body' => json_encode($request->input('body')), // mutator doesnt work on update
                 'foot' => json_encode($request->input('foot')), // mutator doesnt work on update
                 'template' => $request->input('template'),
                 'published' => true

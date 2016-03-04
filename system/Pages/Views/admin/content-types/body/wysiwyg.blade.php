@@ -1,11 +1,7 @@
 <?php $rand = rand(); ?>
 
-
-@if(isset($contentType))
-<div class="panel panel-default content-type group" data-orderby="{{ $contentType['orderByCount'] or null }}" data-id="{{ $rand }}">
-@else
 <div class="panel panel-default content-type group" data-orderby="" data-id="{{ $rand }}">
-@endif
+
     <div class="panel-heading" role="tab" id="headingOne-{{ $rand }}">
         <h4 class="panel-title">
             <div class="col-md-3">
@@ -47,13 +43,13 @@
                        value="{{  $contentType['content']->styles or null }}">
             </div>
             <div class="form-group">
-                <label for="wysiwyg-{{ $rand }}">WYSIWYG Content</label>
+                <label for="wysiwyg-{{ $rand }}">WYSIWYG</label>
                 <div class="wysiwyg content-type-field wysiwyg-{{ $rand }}"
                      data-contentType="wysiwyg"
                      data-id="{{ $rand }}"
-                     data-name="content">
+                     data-name="wysiwyg">
                         @if(isset($contentType))
-                            {!! $contentType['content']->content or null !!}
+                            {!! $contentType['content']->wysiwyg or null !!}
                         @endif
                 </div>
             </div>

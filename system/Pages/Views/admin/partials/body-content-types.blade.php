@@ -4,23 +4,21 @@
     </div>
 
     <div class="body-content-types content-types col-md-12" data-location="body">
-        @if(isset($page) && isset($page->content) && !is_null($page->content))
+        @if(isset($page) && isset($page->body) && !is_null($page->body))
 
-            @foreach($page->content as $key => $contentTypes)
+            @foreach($page->body as $key => $contentTypes)
                 @foreach($contentTypes as $type => $content)
                     <?php $orderCount = 0; ?>
                     @if(View::exists('admin.content-types.body.'.$type))
 
                         <?php $contentType = [
                                 'content' => $content,
-                                'orderByCount' => $orderCount++,
                                 'ajax' => false
                         ]; ?>
                         @include('admin.content-types.body.'.$type, ['contentType' => $contentType])
                     @elseif(View::exists('pages::admin.content-types.body.'.$type))
                         <?php $contentType = [
                                 'content' => $content,
-                                'orderByCount' => $orderCount++,
                                 'ajax' => false
                         ]; ?>
                         @include('pages::admin.content-types.body.'.$type, ['contentType' => $contentType])
@@ -31,14 +29,12 @@
             @if(View::exists('admin.content-types.body.wysiwyg'))
                 <?php $contentType = [
                         'content' => '',
-                        'orderByCount' => 0,
                         'ajax' => false
                 ]; ?>
                 @include('admin.content-types.body.wysiwyg', ['contentType' => $contentType])
             @elseif(View::exists('pages::admin.content-types.body.wysiwyg'))
                 <?php $contentType = [
                         'content' => '',
-                        'orderByCount' => 0,
                         'ajax' => false
                 ]; ?>
                 @include('pages::admin.content-types.body.wysiwyg', ['contentType' => $contentType])

@@ -71,7 +71,7 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text"
-                       name="name"
+                content       name="name"
                        id="name"
                        class="form-control name"
                        placeholder="Name"
@@ -204,26 +204,24 @@
 
                     // hack to assign the order of content types
                     $.each($(locationSelector + ' .content-type'), function(key, ele){
-                       $(this).attr('data-orderby', key);
+                       $(ele).attr('data-orderby', key);
                     });
-                    var contentCount = $(this).closest('.content-type').attr('data-orderby');
+
 
                     $.each($(locationSelector + ' .content-type-field'), function() {
 
                         var contentType = $(this).attr('data-contentType');
                         var inputValue = '';
                         var inputName = $(this).attr('data-name');
+
                         if($(this).hasClass('wysiwyg')) {
                             inputValue = $(this).summernote('code');
                         }
                         else {
                             inputValue = $(this).val();
                         }
-                        // @todo rename content to body everywhere in app
-                        if(location == 'body') {
-                            location = 'content';
-                        }
 
+                        var contentCount = $(this).closest('.content-type').attr('data-orderby');
                         var content = '<input type="hidden" ' +
                                 'name="' + location + '[' + contentCount + ']['+ contentType +']['+ inputName +']" ' +
                                 'value="' + inputValue + '" ' +

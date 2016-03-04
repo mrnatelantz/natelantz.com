@@ -1,10 +1,6 @@
 <?php $rand = rand(); ?>
 
-@if(isset($contentType))
-<div class="panel panel-default content-type group" data-orderby="{{ $contentType['orderByCount'] or null }}" data-id="{{ $rand }}">
-@else
 <div class="panel panel-default content-type group" data-orderby="" data-id="{{ $rand }}">
-@endif
     <div class="panel-heading" role="tab" id="headingOne-{{ $rand }}">
         <h4 class="panel-title">
             <div class="col-md-3">
@@ -34,13 +30,13 @@
     <div id="collapseOne-{{ $rand }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne-{{ $rand }}">
         <div class="panel-body">
             <div class="form-group">
-                <label for="image-{{ $rand }}">Content</label>
+                <label for="image-{{ $rand }}">Image Full Width</label>
                 <input class="content-type-field image-full-width-{{ $rand }} form-control"
                        id="image-{{ $rand }}"
-                       data-name="content"
-                       data-contentType="image-full-width"
+                       data-name="imageFullWidth"
+                       data-contentType="imageFullWidth"
                        data-id="{{ $rand }}"
-                       value="{{ $contentType['content']->content or null }}"
+                       value="{{ $contentType['content']->imageFullWidth or null }}"
                        placeholder="http://domain.com/image.png">
             </div>
         </div>

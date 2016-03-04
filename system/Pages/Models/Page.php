@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
 
-    protected $fillable = ['slug', 'name', 'cover_image', 'head', 'content', 'foot', 'template', 'publish_date', 'unpublish_date', 'published'];
+    protected $fillable = ['slug', 'name', 'cover_image', 'head', 'body', 'foot', 'template', 'publish_date', 'unpublish_date', 'published'];
 
 
     public function getHeadAttribute($value)
@@ -18,7 +18,7 @@ class Page extends Model
         return $value;
     }
 
-    public function getContentAttribute($value)
+    public function getBodyAttribute($value)
     {
         if(is_string($value)) {
             return json_decode($value);
@@ -45,13 +45,13 @@ class Page extends Model
 
     }
 
-    public function setContentAttribute($value)
+    public function setBodyAttribute($value)
     {
         if(!is_string($value)) {
-            $this->attributes['content'] = json_encode($value);
+            $this->attributes['body'] = json_encode($value);
         }
         else {
-            $this->attributes['content'] = $value;
+            $this->attributes['body'] = $value;
         }
 
     }
