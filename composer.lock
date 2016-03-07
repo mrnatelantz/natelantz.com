@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e6643fac31eae7a79966f952c8753e39",
-    "content-hash": "416ce9dfa68fa1f577485063f2e071fc",
+    "hash": "3294a299c91e61408ccdc5ca2e1ecbaf",
+    "content-hash": "5b33f6f2d3b612e41b1086305fcbb477",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -331,6 +331,58 @@
                 "uri"
             ],
             "time": "2016-02-18 21:54:00"
+        },
+        {
+            "name": "imagine/imagine",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "f64ec666baaa800edcbf237db41121a569230709"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/f64ec666baaa800edcbf237db41121a569230709",
+                "reference": "f64ec666baaa800edcbf237db41121a569230709",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2013-07-10 17:25:36"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -690,16 +742,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.17.2",
+            "version": "1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24"
+                "reference": "e19b764b5c855580e8ffa7e615f72c10fd2f99cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
-                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/e19b764b5c855580e8ffa7e615f72c10fd2f99cc",
+                "reference": "e19b764b5c855580e8ffa7e615f72c10fd2f99cc",
                 "shasum": ""
             },
             "require": {
@@ -728,6 +780,7 @@
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "raven/raven": "Allow sending log messages to a Sentry server",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
@@ -737,7 +790,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.16.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -763,7 +816,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-10-14 12:51:02"
+            "time": "2016-03-01 18:00:40"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -1113,6 +1166,51 @@
                 "shell"
             ],
             "time": "2016-02-27 18:59:18"
+        },
+        {
+            "name": "sahusoftcom/eloquent-image-mutator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sahusoftcom/eloquent-image-mutator.git",
+                "reference": "12a5046c4bd1fb9ae370c613a4067f093402168b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sahusoftcom/eloquent-image-mutator/zipball/12a5046c4bd1fb9ae370c613a4067f093402168b",
+                "reference": "12a5046c4bd1fb9ae370c613a4067f093402168b",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "v0.5.0",
+                "laravel/framework": "^5.1",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SahusoftCom\\EloquentImageMutator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Sahu Soft India Private Limited"
+            ],
+            "authors": [
+                {
+                    "name": "Mrigank",
+                    "email": "mridul@sahusoft.com"
+                }
+            ],
+            "description": "One solution for image uploads.",
+            "homepage": "https://github.com/sahusoftcom/eloquent-image-mutator",
+            "keywords": [
+                "image",
+                "laravel",
+                "photo",
+                "upload"
+            ],
+            "time": "2015-12-07 05:40:12"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3225,7 +3323,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "sahusoftcom/eloquent-image-mutator": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -1,15 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nlantz
- * Date: 3/4/16
- * Time: 11:04 AM
- */
 
 namespace RadCms\Media\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use SahusoftCom\EloquentImageMutator\EloquentImageMutatorTrait;
 
-class Media
+class Media extends Model
 {
 
+    use EloquentImageMutatorTrait;
+
+    protected $fillable = ['name', 'description', 'type', 'item', 'folder'];
+
+    protected $image_fields = ['item'];
 }

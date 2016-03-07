@@ -26,6 +26,6 @@ class MediaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register('SahusoftCom\EloquentImageMutator\EloquentImageMutatorProvider');
     }
 }
