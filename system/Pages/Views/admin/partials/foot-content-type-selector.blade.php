@@ -1,25 +1,26 @@
+<?php $rand = rand(); ?>
+
 @if(isset($contentTypes))
-    <div class="btn-group pull-right">
-        <button type="button"
-                class="btn btn-default dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false">
-                    <i class="glyphicon glyphicon-plus"></i>
-        </button>
-        <ul class="dropdown-menu">
-            @foreach($contentTypes as $type)
-                @if(isset($type['name']))
-                    <li>
-                        <a href="#"
-                           class="content-type-select"
-                           data-href="{{ route('pages.contentType', ['name' => 'foot.'.$type['name']]) }}"
-                           data-location="foot">
-                            {{ strtoupper($type['name']) }}
-                        </a>
-                    </li>
-                @endif
-            @endforeach
-        </ul>
-    </div>
+
+    <button id="content-type-select-{{ $rand }}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
+        <i class="material-icons">add</i>
+    </button>
+
+    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+        for="content-type-select-{{ $rand }}">
+        @foreach($contentTypes as $type)
+            @if(isset($type['name']))
+                <li>
+                    <a href="#"
+                       class="content-type-select mdl-menu__item"
+                       data-href="{{ route('pages.contentType', ['name' => 'foot.'.$type['name']]) }}"
+                       data-location="foot">
+                        {{ strtoupper($type['name']) }}
+                    </a>
+                </li>
+            @endif
+        @endforeach
+    </ul>
 @endif
+
+<?php unset($rand); ?>

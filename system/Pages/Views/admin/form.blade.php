@@ -6,150 +6,33 @@
 @endpush
 
 @section('body')
-    <div class="col-sm-10">
-        <div class="clearfix"></div>
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="#head-content-types-panel" aria-controls="head-content-types-panel" role="tab" data-toggle="tab">Head</a></li>
-            <li role="presentation" class="active"><a href="#body-content-types-panel" aria-controls="body-content-types-panel" role="tab" data-toggle="tab">Body</a></li>
-            <li role="presentation"><a href="#foot-content-types-panel" aria-controls="foot-content-types-panel" role="tab" data-toggle="tab">Foot</a></li>
-        </ul>
+    <div class="md-cell mdl-cell--10-col">
+        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+            <div class="mdl-tabs__tab-bar">
+                <a href="#head-content-types-panel" class="mdl-tabs__tab">Head</a>
+                <a href="#body-content-types-panel" class="mdl-tabs__tab is-active">Body</a>
+                <a href="#foot-content-types-panel" class="mdl-tabs__tab">Foot</a>
+            </div>
 
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade" id="head-content-types-panel">
+            <div class="mdl-tabs__panel" id="head-content-types-panel">
                 @include('pages::admin.partials.head-content-types')
             </div>
-            <div role="tabpanel" class="tab-pane active fade in" id="body-content-types-panel">
+            <div class="mdl-tabs__panel is-active" id="body-content-types-panel">
                 @include('pages::admin.partials.body-content-types')
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="foot-content-types-panel">
+            <div class="mdl-tabs__panel" id="foot-content-types-panel">
                 @include('pages::admin.partials.foot-content-types')
             </div>
-
-        </div>
-
-        <form action="" method="POST" id="submitForm" style="visibility: hidden;">
-            {{ csrf_field() }}
-        </form>
-
-    </div>
-
-    <div class="col-sm-2 well">
-        <div class="form-group submit-btns">
-            @if(isset($page))
-                <button class="btn btn-default submit-button"
-                        data-action="{{ route('pages.update', ['id' => $page->page_id]) }}"
-                        data-method="PUT">
-                    Update
-                </button>
-                <button class="btn btn-success submit-button"
-                        data-action="{{ route('pages.publish', ['id' => $page->page_id]) }}"
-                        data-method="PUT">
-                    Publish
-                </button>
-            @else
-                <button class="btn btn-primary submit-button"
-                        data-action="{{ route('pages.post') }}"
-                        data-method="POST">
-                    Create
-                </button>
-            @endif
-        </div>
-
-        @if(isset($page))
-            <div class="form-group">
-                <a href="{{ route('pages.preview', ['id' => $page->page_id]) }}" target="_blank">Preview</a>
-            </div>
-        @endif
-        <div class="input-fields">
-            <div class="form-group">
-                <label for="slug">Slug</label>
-                <input type="text"
-                       id="slug"
-                       name="slug"
-                       class="form-control slug"
-                       placeholder="Slug"
-                       value="{{ $page->slug or null }}"
-                       data-check-action="admin/pages/checkSlug"
-                       required aria-required="true">
-                <span class="help-block hidden">Page with the same slug exists <a href=""></a> </span>
-
-            </div>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text"
-                content       name="name"
-                       id="name"
-                       class="form-control name"
-                       placeholder="Name"
-                       value="{{ $page->name or null }}"
-                required aria-required="true">
-            </div>
-            <div class="form-group">
-                <label for="cover_image">Cover Image</label>
-                <input type="text"
-                       name="cover_image"
-                       id="cover_image"
-                       class="form-control cover_image"
-                       placeholder="Cover Image"
-                       value="{{ $page->cover_image or null }}"
-                       aria-required="false">
-            </div>
-            <div class="form-group">
-                <label for="template">Template</label>
-                @if(isset($templates))
-                    <select name="template" class="form-control template" required aria-required="true">
-                        @foreach($templates as $template)
-                            <option value="{{ $template }}" @if(isset($page->template) && $page->template == $template) selected  @endif>{{ ucfirst($template) }}</option>
-                        @endforeach
-                    </select>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="publish_date">Publish Date</label>
-                <input type="date"
-                       name="publish_date"
-                       id="publish_date"
-                       class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="unpublish_date">Un-Publish Date</label>
-                <input type="date"
-                       name="unpublish_date"
-                       id="unpublish_date"
-                       class="form-control">
-            </div>
-        </div>
-
-        @if(isset($versions))
-            <label>Versions</label>
-            <ul>
-                @foreach($versions as $version)
-                    <li>
-                        <a href="{{  route('pages.showVersion', ['id' => $version->id]) }}" target="_blank">{{ $version->created_at }}</a>
-                    </li>
-                @endforeach
-            </ul>
-        @endif
-        <br>
-        <hr>
-
-        <div class="form-group submit-btns">
-            @if(isset($page))
-                @if($published)
-                    <button class="btn btn-warning submit-button"
-                            data-action="{{ route('pages.unPublish', ['id' => $page_id]) }}"
-                            data-method="PUT">
-                        Un-Publish
-                    </button>
-                @endif
-                <button class="btn btn-danger submit-button"
-                        data-action="{{ route('pages.delete', ['id' => $page_id]) }}"
-                        data-method="DELETE">
-                    Delete
-                </button>
-            @endif
         </div>
     </div>
+
+    @include('pages::admin.partials.form-sidebar')
+
+    <form action="" method="POST" id="submitForm" style="visibility: hidden;">
+        {{ csrf_field() }}
+    </form>
+
+
 @endsection
 
 @push('scripts')
@@ -274,6 +157,9 @@
                 $.get(url, function( data ) {
                     var cssSelector = '.' + location + '-content-types';
                     $(cssSelector).append($(data.html));
+                    //componentHandler.upgradeElement(components);
+                    componentHandler.upgradeDom(); // needed for mdl components to register
+
                 });
                 event.preventDefault();
             });
@@ -293,9 +179,10 @@
                 var direction = $(this).attr('data-direction');
                 var location = $(this).closest('.content-types').attr('data-location');
 
+
                 if(direction == 'up') {
-                    var element = $('div.content-type.group[data-id="' + id + '"]');
-                    var prependElement = $(element).prev($('div.content-type.group'));
+                    var element = $('.content-type.group[data-id="' + id + '"]');
+                    var prependElement = $(element).prev($('.content-type.group'));
                     $(element).insertBefore(prependElement);
 
                     // ghetto, needs to be a css class
@@ -306,8 +193,8 @@
 
                 }
                 else if(direction == 'down') {
-                    var element = $('div.content-type.group[data-id="' + id + '"]');
-                    var afterElement = $(element).next($('div.content-type.group'));
+                    var element = $('.content-type.group[data-id="' + id + '"]');
+                    var afterElement = $(element).next($('.content-type.group'));
                     $(element).insertAfter($(afterElement));
 
                     // ghetto, needs to be a css class
