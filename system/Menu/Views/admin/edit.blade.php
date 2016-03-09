@@ -15,15 +15,35 @@
                 </div>
             </div>
 
-
-            <div class="panel-group col-md-offset-1" id="accordion" role="tablist" aria-multiselectable="true">
-                @if(isset($menu->menu_items) && count($menu->menu_items))
-                    @foreach($menu->menu_items as $menu_item)
-                        @include('menu::admin.partials.menu_item', ['menu_item' => $menu_item, 'menu_id' => $menu->id])
-                    @endforeach
-                @endif
-                @include('menu::admin.partials.menu_item', ['menu_item' => null, 'menu_id' => $menu->id])
-            </div>
         </div>
+
+        @if(isset($menu->menu_items) && count($menu->menu_items))
+            @foreach($menu->menu_items as $menu_item)
+                @include('menu::admin.partials.menu_item', ['menu_item' => $menu_item, 'menu_id' => $menu->id])
+            @endforeach
+        @endif
+        @include('menu::admin.partials.menu_item', ['menu_item' => null, 'menu_id' => $menu->id])
+
+
     @endif
 @endsection
+
+@push('scripts')
+
+    <script>
+
+        $('.menu_item_form_button').on('click', function(event) {
+            var id      = $(this).attr('data-id');
+            var method  = $(this).attr('data-method');
+            var action  = $(this).attr('data-action');
+
+            var methodSpoof = '<input type="hidden" name="_method" value="' + method + '">';
+            var submitForm  = $('#submit-form-' + id);
+
+            $(submitForm).attr('action', action);
+            $(submitForm).append(methodSpoof);
+            $(submitForm).submit();
+        });
+    </script>
+
+@endpush

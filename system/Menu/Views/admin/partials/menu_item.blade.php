@@ -1,96 +1,93 @@
 <?php $rand = rand(); ?>
 
-<div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne-{{ $rand }}">
-        <h4 class="panel-title">
-            <div class="col-sm-6">
-                <a class="collapsed" aria-expanded="false" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne-{{ $rand }}"  aria-controls="collapseOne-{{ $rand }}">
-                    {{ $menu_id }} &nbsp;-&nbsp; {{ $menu_item->name or  'New Menu Item' }}
-                </a>
-            </div>
-            @if(isset($menu_item))
-                <div class="col-sm-6">
-                    <form action="{{ route('menu.destroy.menu_item', ['id' => $menu_id, 'item_id' => $menu_item->id]) }}" method="post">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="delete">
-                        <button type="submit" class="btn btn-xs btn-danger pull-right"><i class="glyphicon glyphicon-remove"></i></button>
-                    </form>
-                </div>
-            @endif
-            <div class="clearfix"></div>
-        </h4>
-    </div>
 
-    <div id="collapseOne-{{ $rand }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne-{{ $rand }}">
-        <div class="panel-body">
-            @if(isset($menu_item))
-                <form class="form-horizontal" method="post" action="{{ route('menu.update.menu_item', ['id' => $menu_id, 'item_id' => $menu_item->id]) }}">
-                    <input type="hidden" name="_method" value="PUT">
-            @else
-                <form class="form-horizontal" method="post" action="{{ route('menu.store.menu_item', ['id' => $menu_id]) }}">
-            @endif
+<section class="mdl-cell mdl-cell--12-col" data-id="{{ $rand }}">
+    <div class="mdl-card mdl-shadow--2dp">
 
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-10">
-                        <select name="type" class="form-control">
-                            <option value="internal" @if(isset($menu_item->type) && $menu_item->type == 'internal') selected @endif>Internal</option>
-                            <option value="external" @if(isset($menu_item->type) && $menu_item->type == 'external') selected @endif>External</option>
-                        </select>
-                    </div>
+        <form id="submit-form-{{ $rand }}" method="POST">
+            {{ csrf_field() }}
+
+            <div class="mdl-card__supporting-text mdl-grid">
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input"
+                           type="text"
+                           id="menu_item_name-{{ $rand }}"
+                           name="name"
+                           value="{{ $menu_item->name or null }}"
+                           placeholder="Menu Item Name"
+                           require aria-required="true">
+                    <label class="mdl-textfield__label" for="menu_item_name-{{ $rand }}">Menu Item Name</label>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Name</label>
-                    <div class="col-sm-10">
-                        <input name="name" class="form-control" placeholder="Menu Item Name" value="{{ $menu_item->name or null }}">
-                    </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <select name="type" id="type-{{ $rand }}" class="mdl-textfield__input">
+                        <option value="internal" @if(isset($menu_item->type) && $menu_item->type == 'internal') selected @endif>Internal</option>
+                        <option value="external" @if(isset($menu_item->type) && $menu_item->type == 'external') selected @endif>External</option>
+                    </select>
+
+                    <label class="mdl-textfield__label" for="type-{{ $rand }}">Type</label>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Page</label>
-                    <div class="col-sm-10">
-                        <select name="page_id" class="form-control">
-                            <option value="">Select Page</option>
-                            @if(isset($pages))
-                                @foreach($pages as $page)
-                                    <option value="{{ $page->id }}" @if(isset($menu_item->page_id) && $menu_item->page_id == $page->id) selected @endif>{{ $page->name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Link</label>
-                    <div class="col-sm-10">
-                        <select name="target" class="form-control">
-                            <option value="_self" @if(isset($menu_item->target) && $menu_item->target == '_self') selected @endif>Same Page</option>
-                            <option value="_blank" @if(isset($menu_item->target) && $menu_item->target == '_blank') selected @endif>New Page</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Url</label>
-                    <div class="col-sm-10">
-                        <input name="url" class="form-control" placeholder="Url" value="{{ $menu_item->url or null }}">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-2 pull-right">
-                        @if(!isset($menu_item))
-                            <button type="submit" class="btn btn-success pull-right">Create</button>
-                        @else
-                            <button type="submit" class="btn btn-primary pull-right">Save</button>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <select name="page_id" id="page-{{ $rand }}" class="mdl-textfield__input">
+                        <option value="">Select Page</option>
+                        @if(isset($pages))
+                            @foreach($pages as $page)
+                                <option value="{{ $page->id }}" @if(isset($menu_item->page_id) && $menu_item->page_id == $page->id) selected @endif>{{ $page->name }}</option>
+                            @endforeach
                         @endif
-                    </div>
+                    </select>
                 </div>
-            </form>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input name="url" id="url-{{ $rand }}" class="mdl-textfield__input" placeholder="Url" value="{{ $menu_item->url or null }}">
+                    <label class="mdl-textfield__label" for="url-{{ $rand }}">Url</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                    <select name="target" id="target-{{ $rand }}" class="mdl-textfield__input">
+                        <option value="_self" @if(isset($menu_item->target) && $menu_item->target == '_self') selected @endif>Same Page</option>
+                        <option value="_blank" @if(isset($menu_item->target) && $menu_item->target == '_blank') selected @endif>New Page</option>
+                    </select>
+                    <label class="mdl-textfield__label" for="target-{{ $rand }}">Target</label>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="mdl-card__actions mdl-card--border">
+            @if(!isset($menu_item))
+                <button type="submit" class="mdl-button menu_item_form_button" data-id="{{ $rand }}" data-method="POST" data-action="{{ route('menu.store.menu_item', ['id' => $menu_id]) }}">Create</button>
+            @else
+                <button type="submit" class="mdl-button menu_item_form_button" data-id="{{ $rand }}" data-method="PUT" data-action="{{ route('menu.update.menu_item', ['id' => $menu_id, 'item_id' => $menu_item->id]) }}">Save</button>
+            @endif
+
+            @if(isset($menu_item))
+
+                <form action="{{ route('menu.destroy.menu_item', ['id' => $menu_id, 'item_id' => $menu_item->id]) }}" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="mdl-button">Remove</button>
+                </form>
+
+            @endif
+
         </div>
+
+        <div class="mdl-card__menu">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="card-controls-{{ $rand }}">
+                <i class="material-icons">more_vert</i>
+            </button>
+
+            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="card-controls-{{ $rand }}">
+                <li class="mdl-menu__item move-content-type-btn" data-id="{{ $rand }}" data-direction="up">Move Up</li>
+                <li class="mdl-menu__item move-content-type-btn" data-id="{{ $rand }}" data-direction="down">Move Down</li>
+                <li class="mdl-menu__item remove-content-type-btn" data-id="{{ $rand }}">Remove</li>
+            </ul>
+        </div>
+
     </div>
-</div>
+</section>
 
 <?php unset($rand); ?>
