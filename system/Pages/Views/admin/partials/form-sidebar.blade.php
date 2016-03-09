@@ -59,15 +59,16 @@
         </div>
         --}}
 
-        <div class="form-group">
-            <label for="template">Template</label>
-            @if(isset($templates))
-                <select name="template" class="form-control template" required aria-required="true">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <select name="template" class="mdl-textfield__input template" required aria-required="true">
+                @if(isset($templates))
                     @foreach($templates as $template)
                         <option value="{{ $template }}" @if(isset($page->template) && $page->template == $template) selected  @endif>{{ ucfirst($template) }}</option>
                     @endforeach
-                </select>
-            @endif
+                @endif
+            </select>
+
+            <label for="template" class="mdl-textfield__label">Template</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input"
