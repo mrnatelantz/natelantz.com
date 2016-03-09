@@ -47,7 +47,11 @@
             $.each($('.wysiwyg'), function() {
 
                 var id = $(this).attr('data-id');
-                $(this).trumbowyg();
+                $(this).trumbowyg({
+                    fullscreenable: false,
+                    //closable: true,
+                    //btns: ['bold', 'italic', '|', 'insertImage']
+                });
             });
 
 

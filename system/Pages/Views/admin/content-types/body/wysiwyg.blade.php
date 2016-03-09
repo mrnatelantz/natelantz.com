@@ -47,7 +47,11 @@
 
 @if(isset($contentType) && $contentType['ajax'])
     <script data-id="{{ $rand }}">
-        $("#wysiwyg-{{ $rand }}").trumbowyg();
+        $("#wysiwyg-{{ $rand }}").trumbowyg({
+            fullscreenable: false,
+            //closable: true,
+            //btns: ['bold', 'italic', '|', 'insertImage']
+        });
     </script>
 @endif
 
