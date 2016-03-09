@@ -1,7 +1,7 @@
 @extends('pages::admin.layouts.app')
 
 @push('css')
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dist/ui/trumbowyg.css">
     <meta name="page_id" content="{{ $page_id or 0 }}">
 @endpush
 
@@ -36,22 +36,20 @@
 @endsection
 
 @push('scripts')
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+    <script src="/dist/trumbowyg.js"></script>
+
     <script>
         {{-- This is getting dirty --}}
         {{-- @todo move this into a js file --}}
         $(document).ready(function() {
 
+
             $.each($('.wysiwyg'), function() {
-                var ele = $(this).attr('data-id');
-                $('.wysiwyg-' + ele).summernote({
-                    height: 300,
-                    disableDragAndDrop: true,
-                    codemirror: {
-                        theme: 'monokai'
-                    }
-                });
+
+                var id = $(this).attr('data-id');
+                $(this).trumbowyg();
             });
+
 
             $('#slug').on('keyup', function(event){
                 var slug = $(this).val();
@@ -126,9 +124,10 @@
                         var contentType = $(this).attr('data-contentType');
                         var inputValue = '';
                         var inputName = $(this).attr('data-name');
+                        var id = $(this).attr('data-id');
 
                         if($(this).hasClass('wysiwyg')) {
-                            inputValue = $(this).summernote('code');
+                            inputValue = $(this).trumbowyg('html');
                         }
                         else {
                             inputValue = $(this).val();

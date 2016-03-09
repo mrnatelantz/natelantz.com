@@ -4,7 +4,7 @@
     <div class="mdl-card mdl-cell mdl-cell--12-col">
         <div class="mdl-card__supporting-text mdl-grid">
 
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell-col-12">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
                 <input class="mdl-textfield__input content-type-field"
                        name="styles"
                        id="styles-{{ $rand }}"
@@ -16,20 +16,21 @@
                 <label class="mdl-textfield__label" for="styles-{{ $rand }}">Inline Styles</label>
             </div>
         </div>
-
+        {{-- dd($contentType) --}}
         <div class="mdl-card__supporting-text mdl-grid">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell-col-12">
-                <textarea class="mdl-textfield__input content-type-field"
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                <textarea class="mdl-textfield__input wysiwyg content-type-field"
                             type="text"
                             rows= "3"
                             name="styles"
                             id="wysiwyg-{{ $rand }}"
                             data-contentType="wysiwyg"
                             data-id="{{ $rand }}"
-                            data-name="wysiwyg">
-                    @if(isset($contentType))
-                        {!! $contentType['content']->wysiwyg or null !!}
-                    @endif
+                            data-name="wysiwyg"
+                            data-value="">
+
+                    {!! $contentType['content']->wysiwyg or null !!}
+
                 </textarea>
                 <label class="mdl-textfield__label" for="wysiwyg-{{ $rand }}">WYSIWYG</label>
             </div>
@@ -46,13 +47,7 @@
 
 @if(isset($contentType) && $contentType['ajax'])
     <script data-id="{{ $rand }}">
-        jQuery(".wysiwyg-{{ $rand }}").summernote({
-            height: 300,
-            disableDragAndDrop: true,
-            codemirror: {
-                theme: 'monokai'
-            }
-        });
+        $("#wysiwyg-{{ $rand }}").trumbowyg();
     </script>
 @endif
 
