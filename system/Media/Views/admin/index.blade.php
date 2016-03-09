@@ -1,10 +1,23 @@
 @extends('media::admin.layouts.app')
 
 @section('body')
-    <div id="media">
+    <div id="media" class="mdl-grid">
         <template v-for="item in media">
-            <div class="col-md-3">
-                <img src="@{{ item.src }}" class="img-circle img-responsive" style="padding-bottom: 10px;"/>
+            <div class="mdl-cell mdl-cell--3-col mdl-card mdl-shadow--2dp" style="background: url(@{{ item.src }}) center / cover;">
+                <div class="mdl-card__title mdl-card--expand"></div>
+                <div class="mdl-card__actions">
+                    <span class="demo-card-image__filename">Image.jpg</span>
+                </div>
+                <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="card-menu-@{{ $index }}">
+                        <i class="material-icons">more_vert</i>
+                    </button>
+
+                    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="card-menu-@{{ $index }}">
+                        <li class="mdl-menu__item" data-id="@{{ $index }}">Edit</li>
+                        <li class="mdl-menu__item" data-id="@{{ $index }}">Remove</li>
+                    </ul>
+                </div>
             </div>
         </template>
     </div>
