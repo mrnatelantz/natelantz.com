@@ -2,8 +2,19 @@
 
 @section('body')
     @if(isset($menu))
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input"
+                           type="text"
+                           id="name"
+                           name="name"
+                           value="{{ $menu->name or null }}"
+                           require aria-required="true">
+                    <label class="mdl-textfield__label" for="name">Menu Name</label>
+                </div>
+            </div>
 
-        <input class="form-control" value="{{ $menu->name or null }}">
 
             <div class="panel-group col-md-offset-1" id="accordion" role="tablist" aria-multiselectable="true">
                 @if(isset($menu->menu_items) && count($menu->menu_items))
