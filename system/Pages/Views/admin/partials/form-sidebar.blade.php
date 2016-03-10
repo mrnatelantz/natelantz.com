@@ -70,6 +70,7 @@
 
             <label for="template" class="mdl-textfield__label">Template</label>
         </div>
+        {{--
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input"
                    type="date"
@@ -87,6 +88,7 @@
                    value="{{ $page->unpublish_date or null }}">
             <label class="mdl-textfield__label" for="unpublish_date">Un-Publish Date</label>
         </div>
+        --}}
     </div>
 
     @if(isset($versions))

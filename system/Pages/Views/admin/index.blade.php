@@ -3,7 +3,7 @@
 @section('body')
     @if( isset($pages) && count($pages) > 0)
         @foreach($pages as $page)
-            <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-cell mdl-cell--3-col">
                 <div class="mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title mdl-card--expand">
                         <h2 class="mdl-card__title-text">{{ $page->name or null }}</h2>
@@ -20,7 +20,7 @@
             </div>
         @endforeach
     @else
-        <div class="mdl-cell mdl-cell--4-col">
+        <div class="mdl-cell mdl-cell--3-col">
             <div class="mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title mdl-card--expand">
                     <h2 class="mdl-card__title-text">

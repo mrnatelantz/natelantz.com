@@ -66,7 +66,7 @@ class PageController extends Controller
         $pageVersion->template     = $request->input('template');
         $pageVersion->save();
 
-        return redirect()->route('pages.show', ['id' => $pageVersion->id]);
+        return redirect()->route('pages.show', ['id' => $page->id]);
     }
 
     /**
