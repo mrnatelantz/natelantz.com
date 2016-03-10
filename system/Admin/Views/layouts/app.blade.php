@@ -9,9 +9,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!--<link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.cyan-light_blue.min.css">-->
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.indigo-pink.min.css" />
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="{{ elixir('assets/vendor/mdl-admin/custom.css') }}" />
 
     @stack('css')
 
@@ -58,8 +56,7 @@
 
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script defer src="https://code.getmdl.io/1.1.2/material.min.js"></script>
+    <script src="{{ elixir('assets/js/admin.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

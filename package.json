@@ -4,7 +4,9 @@
     "gulp": "^3.8.8"
   },
   "dependencies": {
+    "jquery": "^2.2.1",
     "laravel-elixir": "^4.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "material-design-lite": "~1.1.2",
+    "trumbowyg": "~2.0.0-beta.7"
   }
 }
