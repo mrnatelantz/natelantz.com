@@ -22,7 +22,7 @@ elixir(function(mix) {
 
 
     mix.styles([
-        './node_modules/material-design-lite/dist/material.indigo-pink.min.css',
+        './node_modules/material-design-lite/dist/material.blue_grey-indigo.min.css',
         './node_modules/material-design-lite/dist/templates/dashboard/styles.css'
     ], 'public/assets/vendor/mdl-admin/custom.css')
 
