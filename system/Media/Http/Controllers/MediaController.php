@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class MediaController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         return view('media::admin.index');
     }

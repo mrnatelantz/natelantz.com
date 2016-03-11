@@ -7,6 +7,9 @@
     "jquery": "^2.2.1",
     "laravel-elixir": "^4.0.0",
     "material-design-lite": "~1.1.2",
-    "trumbowyg": "~2.0.0-beta.7"
+    "trumbowyg": "~2.0.0-beta.7",
+    "vue": "^1.0.17",
+    "vue-async-data": "^1.0.2",
+    "vue-resource": "^0.7.0"
   }
 }

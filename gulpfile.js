@@ -32,13 +32,19 @@ elixir(function(mix) {
     ], 'public/assets/js/admin.js')
 
     .scripts([
-        './system/Pages/Resources/js/pages-form.js'
+        './system/Pages/Resources/js/pages-form.js',
     ], 'public/assets/js/pages/pages-form.js')
+
+    .scripts([
+        './node_modules/vue/dist/vue.min.js',
+        './node_modules/vue-resource/dist/vue-resource.min.js'
+    ], 'public/assets/vendor/vue/vue-all.js')
 
     .version([
         'public/assets/vendor/mdl-admin/custom.css',
         'public/assets/js/admin.js',
-        'public/assets/js/pages/pages-form.js'
+        'public/assets/js/pages/pages-form.js',
+        'public/assets/vendor/vue/vue-all.js'
     ]);
 
 
